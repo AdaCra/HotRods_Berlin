@@ -1,26 +1,26 @@
 import dbConnect from "@/db/connect";
 import Car from "@/db/models/Cars";
 
-export default async function handler(req, res) {
+export default async function handler(request, response) {
   await dbConnect();
 
-  if (req.method === "GET") {
+  if (request.method === "GET") {
     try {
-      const cars = await Cars.find();
-      return res.status(200).json(cars);
-    } catch (e) {
-      return res.status(400).json({ e: e.message });
+      const cars = await Car.find();
+      return response.status(200).json(cars);
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
     }
-  }
-
-  if (req.method === "POST") {
+  } else if (request.method === "POST") {
     try {
       const carData = request.body;
       const car = new Car(carData);
       await car.save();
-      return res.status(200).json({ status: "Car added to fleet" });
-    } catch (e) {
-      return res.status(400).json({ e: e.message });
+      return response
+        .status(200)
+        .json({ status: `Car ${car.platenumber} added to fleet` });
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
     }
   }
 }
