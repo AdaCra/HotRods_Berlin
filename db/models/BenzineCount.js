@@ -14,7 +14,7 @@ const benzineCountSchema = new Schema(
       },
     },
   },
-  { timestamps: true }
+  { timestamps: { createdAt: true, updatedAt: false } }
 );
 
 const BenzineCount =
