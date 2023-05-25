@@ -21,7 +21,7 @@ const damageReportSchema = new Schema(
         partsListID: { type: Number },
       },
     ],
-    resolved: { type: Boolean, default: false },
+    isResolved: { type: Boolean, default: false },
     resolvedDate: { type: Date },
     mechanicNotes: { type: String },
     repairCosts: [
