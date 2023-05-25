@@ -25,19 +25,15 @@ export default async function handler(request, response) {
         if (!car) {
           return response.status(404).json({ status: "Car not found" });
         }
-        damageReportData.carId = car._id;
-
-
-        console.log("This is the req.body:", damageReportData);
+        const carID = car._id;
+        damageReportData.carId = carID;
 
         const newdamageReport = new DamageReport(damageReportData);
+        const savedDamageReport = await newdamageReport.save();
 
-
-        await newdamageReport.save();
-
-        //
-        // console.log("Updated car:", car);
-        //
+        console.log(car);
+        car.damageReports.push(savedDamageReport._id);
+        await car.save();
 
         return response.status(200).json({ status: "Damage report saved" });
       } catch (error) {

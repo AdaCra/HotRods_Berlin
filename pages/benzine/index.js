@@ -27,7 +27,6 @@ export default function Benzine() {
     if (response.ok) {
       await response.json();
       mutate();
-      // event.target.reset();
     } else {
       console.error(`Error: ${response.status}`);
     }

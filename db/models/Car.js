@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 
 const carSchema = new Schema({
   licensePlateNumber: { type: String, required: true },
+  damageReports: [{ type: Schema.Types.ObjectId, ref: "DamageReport" }],
   serviceHistory: {
     type: [
       {
@@ -14,7 +15,6 @@ const carSchema = new Schema({
     ],
     default: [],
   },
-
 });
 
 const Car = mongoose.models.Car || mongoose.model("Car", carSchema);

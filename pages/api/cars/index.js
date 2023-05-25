@@ -15,6 +15,8 @@ export default async function handler(request, response) {
     case "POST":
       try {
         const carData = request.body;
+        carData.damageReport = []
+        carData.serviceHistory = []
         const car = new Car(carData);
         await car.save();
         return response

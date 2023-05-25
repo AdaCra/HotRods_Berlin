@@ -1,44 +1,38 @@
 import Image from "next/image";
 import styled from "styled-components";
-import UnorderedAnchorList from "./Lists/UnorderedAnchorList";
+import UnorderedAnchorList from "./Lists/UnorderedHeaderList";
+import Link from "next/link";
 
-const HotrodTitle = styled.h1`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  margin: 0;
-  padding: 20px;
-  text-align: center;
+const HotrodHeader = styled.header`
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  height: 100px;
+  border-bottom: 1px solid var(--fontColor-body);
   z-index: 1;
 `;
 
+const HotrodLogo = styled.a`
+  position: fixed;
+  left: calc(7.5% - 69px);
+`;
+// calc(7.5%-69px)
 export default function Header() {
   const listItemsArray = [
-    { title: "Fahrzeugverfügbarkeit", link: "/cars" },
-    { title: "Wetterprognose", link: "/weather" },
-    { title: "Create Damage Report", link: "/damageReport/create" },
-    { title: "Benzine Count", link: "/benzine" },
+    { title: "Fahrzeuge", link: "/cars" },
+    { title: "Wetter", link: "/weather" },
+    { title: "Schadensbericht", link: "/damageReport/create" },
+    { title: "Benzine", link: "/benzine" },
     { title: "Unfall", link: "/accident/create" },
   ];
 
   return (
-    <header>
-      <h1>
-        <Image
-          src="/Hot-Rod-Tour-Berlin-Logo-Main.png"
-          alt="Hotrod Tour Berlin Logo"
-          width={138}
-          height={100}
-        />
-      </h1>
-
+    <HotrodHeader>
       <UnorderedAnchorList
         cssId={"header__menuItems"}
         cssClass={"menuLinks"}
         listItemsArray={listItemsArray}
       />
-    </header>
+    </HotrodHeader>
   );
 }

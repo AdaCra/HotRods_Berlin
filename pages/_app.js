@@ -1,5 +1,6 @@
 import { SWRConfig } from "swr";
 import Layout from "../components/Layout.js";
+import "styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -15,7 +16,7 @@ export default function App({ Component, pageProps }) {
       }}
     >
       <Layout>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
       </Layout>
     </SWRConfig>
   );
