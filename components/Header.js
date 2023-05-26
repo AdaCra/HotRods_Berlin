@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
 import UnorderedAnchorList from "./Lists/UnorderedHeaderList";
-import Link from "next/link";
 
 const HotrodHeader = styled.header`
   position: relative;

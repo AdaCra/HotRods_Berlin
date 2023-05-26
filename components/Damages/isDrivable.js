@@ -1,12 +1,11 @@
-export default function isDrivable(car) {
- 
-  const resolvedReports = filteredReports.filter((report) => report.isResolved);
-  const unresolvedReports = filteredReports.filter(
-    (report) => !report.isResolved
+export function isDrivable(car) {
+  const unresolvedUndrivable = car.damageReports.filter(
+    (report) => !report.isResolved && !report.isDrivable
   );
 
-  return {
-    resolvedReports,
-    unresolvedReports,
-  };
+  if (unresolvedUndrivable.length === 0) {
+    return true;
+  } else {
+    return false;
+  }
 }

@@ -7,7 +7,9 @@ export default async function handler(request, response) {
   switch (request.method) {
     case "GET":
       try {
-        const cars = await Car.find();
+        const cars = await Car.find()
+        .populate('damageReports')
+        .populate('serviceHistory');
         return response.status(200).json(cars);
       } catch (error) {
         return response.status(400).json({ error: error.message });

@@ -1,24 +1,54 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import useSWR from "swr";
+import styled from "styled-components";
+import { useRouter } from "next/router";
+import { isDrivable } from "@/components/Damages/isDrivable";
+
+const FixedCar = styled.li`
+  display: flex;
+  justify-content: center;
+  align itmes: center;
+  cursor: pointer;
+  margin: 10px 0;
+  padding: 13px 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: var(--fontColor-highlight);
+`;
+const BrokenCar = styled.li`
+display: flex;
+justify-content: center;
+align itmes: center;
+cursor: pointer;
+margin: 10px 0;
+padding: 13px 50px;
+height: 50px;
+border-radius: 25px;
+background-color: var(--background-highlight);
+
+`;
 
 export default function Cars() {
   const router = useRouter();
-  const { data: carData } = useSWR("/api/cars", { fallbackData: [] });
-  const { data: damageData } = useSWR("/api/damage", { fallbackData: [] });
+  const { data } = useSWR("/api/cars", { fallbackData: [] });
 
-  console.log(IsItDrivable(damageData, carData));
-  console.log("carData : ", carData);
-  console.log("damageData : ", damageData);
+  let carAvailable;
   return (
     <section>
       <ul>
-        {carData.map((car) => {
-
+        {data.map((car) => {
+          carAvailable = isDrivable(car);
+          const CarComponent = carAvailable ? FixedCar : BrokenCar;
           return (
-            <li key={car._id} className="carList__carPlate">
-              <Link href={`/cars/${car._id}`}>{car.licensePlateNumber}</Link>
-            </li>
+            <CarComponent
+              key={car._id}
+              className={`carList__carPlate `}
+              onClick={() => {
+                router.push(`/cars/${car._id}`);
+              }}
+            >
+              <p>{car.licensePlateNumber}</p>
+            </CarComponent>
           );
         })}
       </ul>
