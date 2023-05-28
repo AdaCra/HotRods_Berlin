@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styled from "styled-components";
 import UnorderedAnchorList from "./Lists/UnorderedHeaderList";
 
@@ -11,11 +10,6 @@ const HotrodHeader = styled.header`
   z-index: 1;
 `;
 
-const HotrodLogo = styled.a`
-  position: fixed;
-  left: calc(7.5% - 69px);
-`;
-// calc(7.5%-69px)
 export default function Header() {
   const listItemsArray = [
     { title: "Fahrzeuge", link: "/cars" },

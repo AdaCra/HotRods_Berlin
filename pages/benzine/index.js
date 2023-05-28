@@ -4,8 +4,12 @@ import useSWR from "swr";
 
 export default function Benzine() {
   const router = useRouter();
-  const { data } = useSWR("/api/benzine", { fallbackData: [] });
+  const { isReady } = router;
+  const { data, isLoading, error } = useSWR("/api/benzine", { fallbackData: [] });
   const { mutate } = useSWR("/api/benzine");
+
+  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+
   let hours = 0;
 
   const lastCount = data[data.length - 1]?.count;

@@ -8,7 +8,9 @@ export default async function handler(request, response) {
   switch (request.method) {
     case "GET":
       try {
-        const car = await Car.findById(id);
+        const car = await Car.findById(id)
+          .populate("damageReports")
+          .populate("serviceHistory");
 
         if (!car) {
           console.log(id);

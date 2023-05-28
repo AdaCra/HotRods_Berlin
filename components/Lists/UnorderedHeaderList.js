@@ -30,6 +30,9 @@ const LinkList = styled.header`
 `;
 
 const ListItem = styled.li`
+  font-family: "Roboto Condensed", Helvetica, Arial, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 24px
   margin: 0;
   padding: 10px 20px;
   border: 1px solid var(--fontColor-body);
@@ -61,8 +64,8 @@ const ListItem = styled.li`
   }
 `;
 const ListLogo = styled.li`
-margin: 0;
-flex-shrink: 0;
+  margin: 0;
+  flex-shrink: 0;
 `;
 
 export default function UnorderedHeaderList({
@@ -88,9 +91,7 @@ export default function UnorderedHeaderList({
 
       {listItemsArray.map((listItem, i) => (
         <ListItem key={listItem._id ? listItem._id : i}>
-          <Link href={listItem.link}>
-            <h2>{listItem.title.toUpperCase()}</h2>
-          </Link>
+          <Link href={listItem.link}>{listItem.title.toUpperCase()}</Link>
         </ListItem>
       ))}
     </LinkList>
