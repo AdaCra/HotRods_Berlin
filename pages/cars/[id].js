@@ -1,15 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
-import { get } from "mongoose";
 import { useRouter } from "next/router.js";
 import { useState } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
 
-import CarIdServicehistory from "@/components/Lists/carIdServiceHistory";
-import LastElementValue from "@/components/ServiceAndDamage/LastElementValue";
-import MostRecentDateFromCreatedAtString from "@/components/ServiceAndDamage/MostRecentDateFromCreatedAtString";
-import { isDrivable } from "@/components/Damages/isDrivable";
+import LastElementValue from "@/components/TimeDateValueCalculations/LastElementValue";
+import MostRecentDateFromCreatedAtString from "@/components/TimeDateValueCalculations/MostRecentDateFromCreatedAtString";
+import { isDrivable } from "@/components/carIdDamages/isDrivable";
+import ShowServiceHistoryDetails from "@/components/carIdServices/ShowServiceHistoryDetails";
+import ShowDamageReportDetails from "@/components/carIdDamages/ShowDamageReportDetails";
 
 const TableSection = styled.section`
   margin: auto;
@@ -29,20 +27,9 @@ const TableData = styled.td`
   vertical-align: center;
 `;
 
-const OpenButton = styled.button`
-  background-color: var(--fontColor-highlight);
-  color: var(--background-highlight);
-  margin-top: 20px;
-  padding: 10px 20px;
-  border-radius:45px;
-  text-align: center;
-  width:300px;
-`;
-
 export default function DetailsPage() {
   const router = useRouter();
-  const [showServiceHistory, setShowServiceHistory] = useState(false);
-  const [showDamageReports, setShowDamageReports] = useState(false);
+
   const { isReady } = router;
   const { id } = router.query;
 
@@ -52,14 +39,6 @@ export default function DetailsPage() {
   const carAvailable = isDrivable(car);
   const { serviceHistory, damageReports } = car;
   const lastDamageType = LastElementValue(damageReports, "type");
-
-  function handleShowServiceHistory() {
-    setShowServiceHistory((prevShowServiceHistory) => !prevShowServiceHistory);
-  }
-
-  function handleShowDamageReports() {
-    setShowDamageReports((prevShowDamageReports) => !prevShowDamageReports);
-  }
 
   return (
     <>
@@ -94,7 +73,7 @@ export default function DetailsPage() {
             <tr>
               <TableData>Beim Kilometerstand</TableData>
               <TableData>
-                {LastElementValue(serviceHistory, "odometerReading")}
+                {LastElementValue(serviceHistory, "odometerReading")}km
               </TableData>
             </tr>
 
@@ -118,34 +97,7 @@ export default function DetailsPage() {
             </tr>
           </tbody>
         </TableStyle>
-        <>
-          <h3>ServiceVerlauf</h3>
-          {car.serviceHistory.length > 0 ? (
-            <OpenButton
-              onClick={() => {
-                handleShowServiceHistory();
-              }}
-            >
-              {showServiceHistory
-                ? "Fahrzeugserviceverlauf ausblenden"
-                : "Fahrzeugserviceverlauf anzeigen"}
-            </OpenButton>
-          ) : (
-            <button>Dieses Auto hat keine Serviceverlauf</button>
-          )}
-          {showServiceHistory && (
-            <>
-              <CarIdServicehistory car={car} />
-              <OpenButton
-                onClick={() => {
-                  handleShowServiceHistory();
-                }}
-              >
-                Fahrzeugserviceverlauf ausblenden
-              </OpenButton>
-            </>
-          )}
-        </>
+        <ShowDamageReportDetails car={car} />
       </TableSection>
     </>
   );

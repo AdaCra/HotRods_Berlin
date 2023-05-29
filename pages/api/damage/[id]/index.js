@@ -16,7 +16,6 @@ export default async function handler(request, response) {
 
       return response.status(200).json(damageReport);
     } catch (error) {
-      console.error(error);
       return response.status(405).json({ status: "Method not allowed" });
     }
   case "POST":
@@ -27,7 +26,6 @@ export default async function handler(request, response) {
       await damageReport.save();
       return response.status(200).json({ status: "Damage report saved" });
     } catch (error) {
-      console.error(error);
       return response.status(400).json({ error: error.message });
     }
   case "PATCH":

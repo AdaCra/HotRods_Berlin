@@ -13,7 +13,6 @@ export default async function handler(request, response) {
           .populate("serviceHistory");
 
         if (!car) {
-          console.log(id);
           return response
             .status(404)
             .json({ status: `${id} could not be found` });

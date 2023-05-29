@@ -20,34 +20,10 @@ const damageReportSchema = new Schema(
     isDrivable: { type: Boolean, required: true, default: true },
   },
   { timestamps: { createdAt: true, updatedAt: true } }
-  );
-  
-  const DamageReport =
+);
+
+const DamageReport =
   mongoose.models.DamageReport ||
   mongoose.model("DamageReport", damageReportSchema);
-  
-  export default DamageReport;
-  
-  
-  
-  // accident: { type: Schema.Types.ObjectId, ref: 'Accident' },
-  // orderList: [
-  //     {
-  //       partsListID: { type: Number },
-  //     },
-  //   ],
-  // mechanicNotes: { type: String },
-  // repairCosts: [
-  //   {
-  //     labourHours: { type: Number },
-  //     estimateCostPerHour: { type: Number },
-  //     materialsUsed: [
-  //       {
-  //         consumable: { type: String },
-  //         amount: { type: Number },
-  //         costPerAmount: { type: Number },
-  //       },
-  //     ],
-  //     partsUsed: [{ part: { type: Number }, quantity: { type: Number } }],
-  //   },
-  // ],
+
+export default DamageReport;

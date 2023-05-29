@@ -4,7 +4,6 @@ import Car from "@/db/models/Car";
 
 export default async function handler(request, response) {
   await dbConnect();
-  console.log("connected");
 
   switch (request.method) {
     case "GET":
@@ -31,7 +30,6 @@ export default async function handler(request, response) {
         const newdamageReport = new DamageReport(damageReportData);
         const savedDamageReport = await newdamageReport.save();
 
-        console.log(car);
         car.damageReports.push(savedDamageReport._id);
         await car.save();
 

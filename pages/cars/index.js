@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { isDrivable } from "@/components/Damages/isDrivable";
+import { isDrivable } from "@/components/carIdDamages/isDrivable";
 
 const FixedCar = styled.li`
   display: flex;
