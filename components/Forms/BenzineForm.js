@@ -1,39 +1,43 @@
 import { useRouter } from "next/router";
+import TimeDifference from "../TimeDateValueCalculations/TimeDifference";
 
-export default function BenzineForm({
-  onSubmit,
-  formName,
-  createAtTimestamp,
-  hoursSinceLastUpdate,
-}) {
-  function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    onSubmit(data);
-  }
-
+export default function BenzineForm({ latestEntry, handleSubmit }) {
   const router = useRouter();
 
   const redirectToHomePage = () => {
     router.push("/");
   };
 
-  const currentTimeStamp = new Date();
-  const timeDifference =
-    currentTimeStamp.getTime() - createAtTimestamp.getTime();
-  hoursSinceLastUpdate = timeDifference / (1000 * 60 * 60);
+  const lastCount = latestEntry?.count;
+  const createAtTimestamp = new Date(latestEntry?.createdAt);
+  const formattedDate = createAtTimestamp.toLocaleDateString("en-GB");
+  const formattedTime = createAtTimestamp.toLocaleTimeString("en-US", {
+    timeStyle: "short",
+  });
 
-  if (hoursSinceLastUpdate > 12) {
-    return (
-      <>
-        <p>
-          <em>
-            {Math.floor(hoursSinceLastUpdate)} stunden seit der letzten
-            Aktualisieren
-          </em>
-        </p>
-        <form onSubmit={handleSubmit} formName={formName} disabled>
+  const hoursSinceLastUpdate = TimeDifference(createAtTimestamp);
+
+  return (
+    <section>
+      <h2 id="update-benzine">Benzinestände</h2>
+      <h3>
+        Letzte Aktualisierung:{" "}
+        <b>
+          {formattedTime === "Invalid Date" ? "Loading" : formattedTime},{" "}
+          {formattedDate === "Invalid Date" ? "Loading" : formattedDate}
+        </b>
+        <br />
+        Letzte Zahl: <b>{lastCount ? lastCount : "Loading"}</b> Benzinkanister
+      </h3>
+
+      <p>
+        <em>
+          {Math.floor(hoursSinceLastUpdate)} stunden seit der letzten
+          Aktualisieren
+        </em>
+      </p>
+      {hoursSinceLastUpdate > 12 ? (
+        <form onSubmit={handleSubmit} formName="update-benzine">
           <label>
             Aktualisieren:
             <input
@@ -41,23 +45,16 @@ export default function BenzineForm({
               name="count"
               id="benzineCount"
               placeholder="##"
+              min={0}
             ></input>
             <button type="submit">Absenden</button>
           </label>
         </form>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <p>
-          <em>
-            {Math.floor(hoursSinceLastUpdate)} stunden seit der letzten
-            Aktualisieren
-          </em>
-        </p>
-        <button onClick={redirectToHomePage}>Die Zählung ist aktuell</button>
-      </>
-    );
-  }
+      ) : (
+        <>
+          <p onClick={redirectToHomePage}>Die Zählung ist aktuell</p>
+        </>
+      )}
+    </section>
+  );
 }
