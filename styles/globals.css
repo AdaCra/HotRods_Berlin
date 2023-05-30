@@ -61,11 +61,24 @@
 }
 
 body {
+  overflow-y: scroll;
   margin: 0;
   padding: 0;
   background-color: rgb(0, 0, 0);
   color: var(--fontColor-body);
   font-family: system-ui;
+}
+
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
 
 h1,
@@ -84,7 +97,7 @@ h2 {
   color: var(--fontColor-highlight);
 }
 h3 {
-  font-size: 1.2em;
+  font-size: 1.4em;
   margin: 30px 0 10px;
 }
 h5 {
@@ -96,4 +109,9 @@ h5 {
   font-size: 1.1em;
   margin-bottom: 5px;
   font-style: italic;
+}
+
+p{
+  line-height: 2em;
+  font-size: 1.1em;
 }

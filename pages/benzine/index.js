@@ -1,4 +1,4 @@
-import BenzineForm from "@/components/Forms/BenzineForm";
+import BenzinePageContent from "@/components/benzineData/BenzinePageContent";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
@@ -41,5 +41,5 @@ export default function Benzine() {
     updateBenzine(data);
   }
 
-  return <BenzineForm latestEntry={latestEntry} handleSubmit={handleSubmit} />;
+  return <BenzinePageContent latestEntry={latestEntry} handleSubmit={handleSubmit} />;
 }

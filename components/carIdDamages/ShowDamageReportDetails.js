@@ -8,9 +8,6 @@ export default function ShowUnresolvedDamageDetails({ car }) {
   const [showResolvedDamage, setShowResolvedDamage] = useState(false);
   const [showServiceHistory, setShowServiceHistory] = useState(false);
 
-  function handleShowServiceHistory() {
-    setShowServiceHistory((prevShowServiceHistory) => !prevShowServiceHistory);
-  }
   function handleShowUnresolvedDamage() {
     setShowUnresolvedDamage(
       (prevShowUnresolvedDamage) => !prevShowUnresolvedDamage
@@ -18,6 +15,9 @@ export default function ShowUnresolvedDamageDetails({ car }) {
   }
   function handleShowResolvedDamage() {
     setShowResolvedDamage((prevShowResolvedDamage) => !prevShowResolvedDamage);
+  }
+  function handleShowServiceHistory() {
+    setShowServiceHistory((prevShowServiceHistory) => !prevShowServiceHistory);
   }
 
   return (

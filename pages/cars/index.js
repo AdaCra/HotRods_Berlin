@@ -6,7 +6,7 @@ import { isDrivable } from "@/components/carIdDamages/isDrivable";
 const FixedCar = styled.li`
   display: flex;
   justify-content: center;
-  align itmes: center;
+  align-items: center;
   cursor: pointer;
   margin: 10px 0;
   padding: 13px 50px;
@@ -18,16 +18,16 @@ const FixedCar = styled.li`
 const BrokenCar = styled.li`
 display: flex;
 justify-content: center;
-align items: center;
+align-items: center;
 cursor: pointer;
-margin: 10px 0;
+margin: 20px 0;
 padding: 13px 50px;
 height: 50px;
 border-radius: 25px;
 background-color: var(--background-highlight);
 `;
 
-const CenterSection = styled.ul`
+const CenterSection = styled.section`
   margin: 20px auto;
 `;
 
@@ -36,12 +36,17 @@ export default function Cars() {
   const { isReady } = router;
   const { data, isLoading, error } = useSWR("/api/cars", { fallbackData: [] });
 
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  if (!isReady || isLoading || error)
+    return (
+      <CenterSection>
+        <h2>Loading...</h2>
+      </CenterSection>
+    );
 
   let carAvailable;
   return (
     <CenterSection>
-      <h2>Auto Liste</h2>
+      <h2>AUTO LISTE</h2>
       <ul>
         {data.map((car) => {
           carAvailable = isDrivable(car);

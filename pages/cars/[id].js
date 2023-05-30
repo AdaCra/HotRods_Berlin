@@ -34,7 +34,7 @@ export default function DetailsPage() {
   const { id } = router.query;
 
   const { data: car, isLoading, error } = useSWR(`/api/cars/${id}`);
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  if (!isReady || isLoading || error) return <TableSection><h2>Loading...</h2></TableSection>;
 
   const carAvailable = isDrivable(car);
   const { serviceHistory, damageReports } = car;
