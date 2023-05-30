@@ -26,9 +26,30 @@ export const ServiceTableData = styled.td`
   color: var(--fontColor-body);
   text-align: center;
 `;
-export const ServiceTableBool = styled.td`
+export const ServiceTableDataYes = styled.td`
+  width: 120px;
+  border: 1px solid var(--background-highlight);
+  text-align: center;
+  background-color: var(--fontColor-highlight);
+  color: var(--background);
+`;
+export const ServiceTableDataNo = styled.td`
+  width: 120px;
+  border: 1px solid var(--background-highlight);
+  color: var(--fontColor-highlight);
+  text-align: center;
+`;
+
+export const ServiceTableBoolYes = styled.td`
   width: 30px;
   border: 1px solid var(--background-highlight);
-  color: var(--fontColor-body);
-  padding-left: 5px;
+  text-align: center;
+  background-color: var(--fontColor-highlight);
+  color: var(--background);
+`;
+export const ServiceTableBoolNo = styled.td`
+  width: 30px;
+  border: 1px solid var(--background-highlight);
+  color: var(--fontColor-highlight);
+  text-align: center;
 `;

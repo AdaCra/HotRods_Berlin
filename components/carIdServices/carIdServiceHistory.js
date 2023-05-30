@@ -7,7 +7,10 @@ import {
   ServiceTableStyle,
   ServiceTH,
   ServiceTableData,
-  ServiceTableBool,
+  ServiceTableDataYes,
+  ServiceTableDataNo,
+  ServiceTableBoolYes,
+  ServiceTableBoolNo,
 } from "./ServiceDetailsList.styled";
 
 export default function CarIdServicehistory({ car }) {
@@ -48,24 +51,32 @@ export default function CarIdServicehistory({ car }) {
                           service.serviceIncluded[serviceType]
                         ).map(([key, value]) => (
                           <tr key={key}>
-                            <ServiceTableBool>
-                              {value ? (
-                                <Image
+                            {value ? (
+                                <>
+                              <ServiceTableBoolYes>
+                                {/* <Image
                                   src="/iconography/greenTick.png"
                                   alt="Green Tick"
                                   width={20}
                                   height={20}
-                                />
-                              ) : (
-                                <Image
+                                /> */}
+                                <b>✓</b>
+                              </ServiceTableBoolYes>
+                              <ServiceTableDataYes>{key}</ServiceTableDataYes>
+                              </>
+                            ) : (
+                                <>
+                              <ServiceTableBoolNo>
+                                {/* <Image
                                   src="/iconography/redCross.png"
                                   alt="Red Cross"
                                   width={20}
                                   height={20}
-                                />
-                              )}
-                            </ServiceTableBool>
-                            <ServiceTableData>{key}</ServiceTableData>
+                                /> */}<b>✕</b>
+                              </ServiceTableBoolNo>
+                              <ServiceTableDataNo>{key}</ServiceTableDataNo>
+                              </>
+                            )}
                           </tr>
                         ))}
                       </ServiceDetailBody>
