@@ -1,20 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const DropHeading = styled.div`
+const DropHeading = styled.h3`
   display: flex;
   justify-content: space-between;
-  width: 50%;
 `;
 
-const ArrowDrop = styled.h3`
-  width: 20%;
-  text-align: center;
-`;
-const TitleDrop = styled.h3`
-  width: 60%;
-  text-align: center;
-`;
 export default function ExpandingH3WithOnClickToggle({
   title,
   onClickFunction,
@@ -31,13 +22,9 @@ export default function ExpandingH3WithOnClickToggle({
         onClickFunction(), handleRotate();
       }}
     >
-      <ArrowDrop>
-        <span>{rotate ? "▲" : "▽"}</span>
-      </ArrowDrop>
-      <TitleDrop>{title}</TitleDrop>
-      <ArrowDrop>
-        <span>{rotate ? "▲" : "▽"}</span>
-      </ArrowDrop>
+      <span>{rotate ? "▲" : "▽"}</span>
+      <span>{title}</span>
+      <span>{rotate ? "▲" : "▽"}</span>
     </DropHeading>
   );
 }

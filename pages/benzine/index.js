@@ -1,6 +1,13 @@
+import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
 import BenzinePageContent from "@/components/benzineData/BenzinePageContent";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 import useSWR from "swr";
+
+const CenterSection = styled.section`
+  margin: 20px auto;
+  width: 600px;
+`;
 
 export default function Benzine() {
   const router = useRouter();
@@ -12,7 +19,10 @@ export default function Benzine() {
   } = useSWR("/api/benzine", { fallbackData: [] });
   const { mutate } = useSWR("/api/benzine");
 
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  if (!isReady || isLoading || error)
+    return (
+      <H2TextPopUp text = "LOADING..."/>
+    );
 
   const latestEntry = benzineData[benzineData.length - 1];
 
@@ -41,5 +51,7 @@ export default function Benzine() {
     updateBenzine(data);
   }
 
-  return <BenzinePageContent latestEntry={latestEntry} handleSubmit={handleSubmit} />;
+  return (
+    <BenzinePageContent latestEntry={latestEntry} handleSubmit={handleSubmit} />
+  );
 }

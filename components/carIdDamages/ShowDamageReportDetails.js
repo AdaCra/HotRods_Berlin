@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CarIdDamageReports from "./carIdDamageReports";
-import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH3WithOnClickToggle";
+import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH3/ExpandingH3WithOnClickToggle";
 import CarIdServicehistory from "../carIdServices/carIdServiceHistory";
 
 export default function ShowUnresolvedDamageDetails({ car }) {
@@ -23,7 +23,7 @@ export default function ShowUnresolvedDamageDetails({ car }) {
   return (
     <>
       <ExpandingH3WithOnClickToggle
-        title={"UNGELÖSTE SCHADENSBERICHTE"}
+        title={"UNGELÖSTE SCHÄDENS"}
         onClickFunction={handleShowUnresolvedDamage}
       />
       {showUnresolvedDamage && (
@@ -35,7 +35,7 @@ export default function ShowUnresolvedDamageDetails({ car }) {
       )}
 
       <ExpandingH3WithOnClickToggle
-        title={"GELÖSTE SCHADENSBERICHTE"}
+        title={"GELÖSTE SCHÄDENS"}
         onClickFunction={handleShowResolvedDamage}
       />
       {showResolvedDamage && (

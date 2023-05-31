@@ -9,7 +9,6 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
       .filter((report) =>
         resolvedFilter ? report.isResolved : !report.isResolved
       ).length;
- console.log(filteredData)
   return (
     <>
       {dataSet.damageReports &&
@@ -20,7 +19,6 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
             resolvedFilter ? report.isResolved : !report.isResolved
           )
           .map((report) => {
-            console.log(report);
             if (filteredData === 0) {
               return `Es gibt keine ${title} Berichte`;
             } else if (filteredData > 0) {

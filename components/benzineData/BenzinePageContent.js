@@ -1,61 +1,16 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 import TimeDifference from "../TimeDateValueCalculations/TimeDifference";
 import styled from "styled-components";
-import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH3WithOnClickToggle";
+import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH3/ExpandingH3WithOnClickToggle";
 import BenzineForm from "./BenzineForm";
 
-const FormSection = styled.section`
+const CenterSection = styled.section`
   margin: 20px auto;
-`;
-const FormStyled = styled.form`
-display: flex
-flex-direction:column;
-text-align: center;
-`;
-const FormInput = styled.input`
-  margin: auto;
-  padding: 0;
-  height: 45px;
-  line-height: 45px;
-  width: 120px;
-  background-color: black;
-  border: 2px solid var(--fontColor-highlight);
-  border-radius: 15px;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1.2em;
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-  }
-`;
-const FormButton = styled.button`
-  margin: auto;
-  margin-left: 10px;
-  padding: 0;
-  height: 45px;
-  line-height: 45px;
-  width: 120px;
-  background-color: var(--fontColor-highlight);
-  color: var(--background-highlight);
-  border-radius: 15px;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1.2em;
-`;
-
-const ExpanderDiv = styled.div`
-  display: flex;
-  justify-content: center;
+  width: 600px;
 `;
 
 export default function BenzinePageContent({ latestEntry, handleSubmit }) {
-  const router = useRouter();
   const [showBenzineRefill, setShowBenzineRefill] = useState(false);
-  const redirectToHomePage = () => {
-    router.push("/");
-  };
 
   function handleShowBenzineFiller() {
     setShowBenzineRefill(
@@ -76,7 +31,7 @@ export default function BenzinePageContent({ latestEntry, handleSubmit }) {
   const hoursSinceLastUpdate = TimeDifference(createAtTimestamp);
 
   return (
-    <FormSection>
+    <CenterSection>
       <h2>BENZINESTÄNDE</h2>
       <section>
         {hoursSinceLastUpdate > 12 ? (
@@ -87,9 +42,9 @@ export default function BenzinePageContent({ latestEntry, handleSubmit }) {
             label={"AKTUALISIEREN:"}
           />
         ) : (
-          <h3 onClick={redirectToHomePage}>Die Zählung ist aktuell</h3>
+          <h3 style={{ textAlign: "center" }}>DIE ZÄHLUNG IST AKTUEL</h3>
         )}
-        <hr style={{ margin: "50px 0 25px" }} />
+        <hr style={{ margin: "30px 0 25px" }} />
       </section>
       <section>
         <p>
@@ -108,22 +63,31 @@ export default function BenzinePageContent({ latestEntry, handleSubmit }) {
         </p>
         <hr style={{ margin: "30px 0 25px" }} />
       </section>
-      <ExpanderDiv>
-        <ExpandingH3WithOnClickToggle
-          title={"AUFFÜLLEN"}
-          onClickFunction={handleShowBenzineFiller}
-        />
-      </ExpanderDiv>
-      {showBenzineRefill && (
-        <section>
-          <BenzineForm
-            handleSubmit={handleSubmit}
-            formName={"benzineRefill"}
-            label={"AUFGEFÜLLTE ANZAHL:"}
+      {hoursSinceLastUpdate < 12 ? (
+        <>
+          <ExpandingH3WithOnClickToggle
+            title={"AUFFÜLLEN"}
+            onClickFunction={handleShowBenzineFiller}
           />
-        </section>
+          {showBenzineRefill && (
+            <section>
+              <BenzineForm
+                handleSubmit={handleSubmit}
+                formName={"benzineCount"}
+                label={"AUFGEFÜLLTE ANZAHL:"}
+              />
+            </section>
+          )}
+        </>
+      ) : (
+        <h4 style={{ textAlign: "center", color: "var(--fontColor-highlight" }}>
+          <b>
+            Bitte zählen Sie das restliche Benzin, bevor Sie nach dem Kauf
+            nachfüllen
+          </b>
+        </h4>
       )}
-      <hr style={{ margin: "50px 0 25px" }} />
-    </FormSection>
+      <hr style={{ margin: "30px 0 25px" }} />
+    </CenterSection>
   );
 }

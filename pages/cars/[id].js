@@ -1,24 +1,20 @@
 import { useRouter } from "next/router.js";
-import { useState } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
 
 import LastElementValue from "@/components/TimeDateValueCalculations/LastElementValue";
 import MostRecentDateFromCreatedAtString from "@/components/TimeDateValueCalculations/MostRecentDateFromCreatedAtString";
 import { isDrivable } from "@/components/carIdDamages/isDrivable";
-import ShowServiceHistoryDetails from "@/components/carIdServices/ShowServiceHistoryDetails";
 import ShowDamageReportDetails from "@/components/carIdDamages/ShowDamageReportDetails";
+import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
 
-const TableSection = styled.section`
-  margin: auto;
-  width: 60%;
-  min-width: 900px;
+const CenterSection = styled.section`
+  margin: 20px auto;
+  width: 600px;
 `;
 const TableStyle = styled.table`
-  margin: 15px;
-  width: 50%;
-  border-collapse: collapse;
-  border-spacing: 0;
+  margin: auto;
+  width: 100%;
 `;
 const TableData = styled.td`
   width: 50%;
@@ -34,7 +30,7 @@ export default function DetailsPage() {
   const { id } = router.query;
 
   const { data: car, isLoading, error } = useSWR(`/api/cars/${id}`);
-  if (!isReady || isLoading || error) return <TableSection><h2>Loading...</h2></TableSection>;
+  if (!isReady || isLoading || error) return <H2TextPopUp text="LOADING..." />;
 
   const carAvailable = isDrivable(car);
   const { serviceHistory, damageReports } = car;
@@ -42,10 +38,8 @@ export default function DetailsPage() {
 
   return (
     <>
-      <TableSection>
-        <h2 style={{ textAlign: "left", textDecoration: "underline" }}>
-          FAHRZEUGDETAILS
-        </h2>
+      <CenterSection>
+        <h2>FAHRZEUGDETAILS</h2>
         <h3>ALLGEMEIN</h3>
         <TableStyle>
           <tbody>
@@ -87,9 +81,9 @@ export default function DetailsPage() {
               <TableData>Art des Schadens</TableData>
               <TableData>
                 {lastDamageType === "mechanical"
-                  ? "mechanisch"
+                  ? "Mechanisch"
                   : lastDamageType === "electrical"
-                  ? "elektrisch"
+                  ? "Elektrisch"
                   : lastDamageType === "body"
                   ? "Karosserie"
                   : "Unbekannt"}
@@ -98,7 +92,7 @@ export default function DetailsPage() {
           </tbody>
         </TableStyle>
         <ShowDamageReportDetails car={car} />
-      </TableSection>
+      </CenterSection>
     </>
   );
 }

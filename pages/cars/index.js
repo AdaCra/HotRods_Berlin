@@ -2,6 +2,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { isDrivable } from "@/components/carIdDamages/isDrivable";
+import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
 
 const FixedCar = styled.li`
   display: flex;
@@ -38,9 +39,8 @@ export default function Cars() {
 
   if (!isReady || isLoading || error)
     return (
-      <CenterSection>
-        <h2>Loading...</h2>
-      </CenterSection>
+      <H2TextPopUp text = "LOADING..."/>
+
     );
 
   let carAvailable;

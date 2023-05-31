@@ -53,13 +53,7 @@ export default function CarIdServicehistory({ car }) {
                           <tr key={key}>
                             {value ? (
                                 <>
-                              <ServiceTableBoolYes>
-                                {/* <Image
-                                  src="/iconography/greenTick.png"
-                                  alt="Green Tick"
-                                  width={20}
-                                  height={20}
-                                /> */}
+                              <ServiceTableBoolYes>                            
                                 <b>✓</b>
                               </ServiceTableBoolYes>
                               <ServiceTableDataYes>{key}</ServiceTableDataYes>
@@ -67,12 +61,7 @@ export default function CarIdServicehistory({ car }) {
                             ) : (
                                 <>
                               <ServiceTableBoolNo>
-                                {/* <Image
-                                  src="/iconography/redCross.png"
-                                  alt="Red Cross"
-                                  width={20}
-                                  height={20}
-                                /> */}<b>✕</b>
+                                <b>✕</b>
                               </ServiceTableBoolNo>
                               <ServiceTableDataNo>{key}</ServiceTableDataNo>
                               </>

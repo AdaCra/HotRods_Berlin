@@ -12,18 +12,17 @@ const HotrodHeader = styled.header`
 
 export default function Header() {
   const listItemsArray = [
-    { title: "Fahrzeuge", link: "/cars" },
+    { title: "Autos", link: "/cars" },
     { title: "Wetter", link: "/weather" },
-    { title: "Schadensbericht", link: "/damageReport/create" },
+    { title: "Schaden", link: "/damageReport" },
     { title: "Benzine", link: "/benzine" },
-    { title: "Unfall", link: "/accident/create" },
+    { title: "Unfall", link: "/accident" },
   ];
 
   return (
     <HotrodHeader>
       <UnorderedAnchorList
         cssId={"header__menuItems"}
-        cssClass={"menuLinks"}
         listItemsArray={listItemsArray}
       />
     </HotrodHeader>
