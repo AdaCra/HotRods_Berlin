@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+
+
 import "./Car";
 
 const { Schema } = mongoose;
@@ -13,8 +15,8 @@ const damageReportSchema = new Schema(
       enum: ["body", "mechanical", "electrical"],
       required: true,
     },
-    description: { type: String, required: true, min: 15, max: 500 },
-    photo: { type: String },
+    description: { type: String, required: true, max: 170 },
+    photo: [{ type: String }],
     isResolved: { type: Boolean, default: false },
     resolvedDate: { type: Date },
     isDrivable: { type: Boolean, required: true, default: true },

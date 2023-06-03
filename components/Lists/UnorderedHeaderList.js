@@ -9,7 +9,6 @@ export default function UnorderedHeaderList({
   listItemsArray,
 }) {
   const displayWidth = ScreenWidthCheck();
-  console.log(displayWidth);
   const image = { width: 138, height: 96 };
   switch (true) {
     case displayWidth >= 1200:
@@ -24,14 +23,21 @@ export default function UnorderedHeaderList({
       image.width = 138 * 0.8;
       image.height = 96 * 0.8;
       break;
-    case displayWidth < 550 :
+    case displayWidth < 550:
       image.width = 138 * 0.7;
       image.height = 96 * 0.7;
       break;
   }
 
   return (
-    <div style={{margin:"auto", display:"flex", flexDirection:"column", alignItems:"center"}}>
+    <div
+      style={{
+        margin: "auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {displayWidth < 490 && (
         <>
           <Link href={"/"}>

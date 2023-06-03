@@ -8,9 +8,9 @@ export const CheckboxStyle = styled.input`
   &::before {
     content: "✕";
     display: inline-block;
-    line-height: 25px;
-    width: 25px;
-    height: 25px;
+    line-height: 30px;
+    width: 32px;
+    height: 32px;
     border: 2px solid var(--fontColor-highlight);
     text-align: center;
     font-weight: bold;
@@ -24,9 +24,9 @@ export const CheckboxStyle = styled.input`
   &:checked::after {
     content: "✓";
     display: inline-block;
-    line-height: 25px;
-    width: 25px;
-    height: 25px;
+    line-height: 30px;
+    width: 32px;
+    height: 32px;
     border: 2px solid var(--fontColor-highlight);
     background-color: var(--fontColor-highlight);
     text-align: center;
