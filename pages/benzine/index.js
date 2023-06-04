@@ -1,13 +1,7 @@
 import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
 import BenzinePageContent from "@/components/benzineData/BenzinePageContent";
 import { useRouter } from "next/router";
-import styled from "styled-components";
 import useSWR from "swr";
-
-const CenterSection = styled.section`
-  margin: 20px auto;
-  width: 600px;
-`;
 
 export default function Benzine() {
   const router = useRouter();

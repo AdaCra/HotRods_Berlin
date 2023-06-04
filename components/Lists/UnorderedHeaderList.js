@@ -47,7 +47,7 @@ export default function UnorderedHeaderList({
                 alt="Hotrod Tour Berlin Logo"
                 width={image.width}
                 height={image.height}
-                priority
+                priority={true}
               />
             </h1>
           </Link>

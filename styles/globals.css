@@ -51,7 +51,8 @@
   --fontColor-body: #b4b4b4;
   --fontColor-body-disabled: #7c7c7c;
   --fontColor-highlight: #c8a13e;
-  --fontColor-highlight-disabled: #928360;
+  --fontColor-highlight-disabled: #ada07e;
+  --fontColor-highlight-asfa: #310ae0;
 }
 
 *,
