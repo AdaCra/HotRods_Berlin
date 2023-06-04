@@ -4,7 +4,12 @@ export const CenterSection = styled.section`
   margin: 20px auto;
   width: 600px;
 `;
-
+export const FormStyled = styled.form`
+    display: flex
+    flex-direction:column;
+    text-align: center;
+    width:600px;
+    `;
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: row;

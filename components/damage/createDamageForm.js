@@ -9,10 +9,13 @@ import {
   FormSelector,
   FullTextArea,
   FormButton,
+  FormStyled,
 } from "./createDamageForm.style";
 import DamageImageUpload from "./damageImageUpload";
+import { useState } from "react";
 
-export default function CreateDamageForm({ handleSubmit }) {
+export default function CreateDamageForm({ onSubmit }) {
+  const [isChecked, setIsChecked] = useState(true);
   const router = useRouter();
   const { isReady } = router;
   const {
@@ -24,18 +27,24 @@ export default function CreateDamageForm({ handleSubmit }) {
   if (!isReady || carLoading || carError)
     return <H2TextPopUp text="LOADING..." />;
 
-  // const redirectToHomePage = () => {
-  //   router.push("/damageReport");
-  // };
-
-  function onChange(event) {
-    console.log(event);
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    onSubmit(data);
+    console.log(data);
   }
+
+  function handleCheckboxChange() {
+    setIsChecked(!isChecked);
+  }
+  console.log(isChecked);
+
   return (
     <CenterSection>
       <h2>SCHADENSBERICHT ERSTELLEN</h2>
       <section>
-        <form>
+        <form onSubmit={handleSubmit} formname="damagereports">
           <fieldset>
             <legend>
               <h3>SCHADENFORMULAR</h3>
@@ -72,9 +81,9 @@ export default function CreateDamageForm({ handleSubmit }) {
             <InputDiv>
               <label htmlFor="isDrivable">Ist das Auto noch fahrbar?:</label>
               <Checkbox
-                name="isDrivable"
-                defaultChecked={true}
-                onChange={onChange}
+                name={"isDrivable"}
+                value={isChecked}
+                onChange={handleCheckboxChange}
               />
             </InputDiv>
 
@@ -95,6 +104,7 @@ export default function CreateDamageForm({ handleSubmit }) {
                 placeholder="Schreiben Sie eine kurze Beschreibung des Problems"
                 name="description"
                 id="description"
+                minLength={10}
                 maxLength={130}
               />
             </InputDiv>

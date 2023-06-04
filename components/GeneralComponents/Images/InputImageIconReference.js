@@ -29,7 +29,6 @@ export default function InputImageIconReference({ handleFileUpload }) {
         multiple
         onChange={handleFileUpload}
         style={{ display: "none" }}
-        required
       />
     </>
   );

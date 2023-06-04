@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const benzineCountSchema = new Schema(
   {
+    name: { type: String, required: true },
     count: {
       type: Number,
       required: true,
@@ -13,6 +14,7 @@ const benzineCountSchema = new Schema(
         message: "The count must be a whole number.",
       },
     },
+    isRefill: { type: Boolean, default: false },
   },
   { timestamps: { createdAt: true, updatedAt: false } }
 );

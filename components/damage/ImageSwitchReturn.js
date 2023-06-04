@@ -43,13 +43,12 @@ const ThumbnailRemoveButton = styled.button`
 `;
 
 export default function ImageUploadPreviews({
-  selectedImages,
   imageThumbnails,
   handleFileUpload,
   handleImageRemove,
 }) {
   const renderImage = (index) => {
-    if (index < selectedImages.length) {
+    if (index < imageThumbnails.length) {
       const thumbnailSrc = imageThumbnails[index];
       return (
         <Thumbnail key={index}>
@@ -61,7 +60,7 @@ export default function ImageUploadPreviews({
           </ThumbnailRemoveButton>
         </Thumbnail>
       );
-    } else if (index === selectedImages.length) {
+    } else if (index === imageThumbnails.length) {
       return (
         <div key={index}>
           <InputImageIconReference handleFileUpload={handleFileUpload} />

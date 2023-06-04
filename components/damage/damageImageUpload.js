@@ -21,7 +21,7 @@ export default function DamageImageUpload() {
 
   const handleFileUpload = (event) => {
     const files = Array.from(event.target.files);
-
+console.log(files)
     if (selectedImages.length + files.length > 4) {
       // Limit the total number of images to 4
       return;
@@ -44,23 +44,25 @@ export default function DamageImageUpload() {
           ]);
         };
 
+        console.log(reader);
         reader.readAsDataURL(file);
       }
     });
   };
+
   const handleImageRemove = (index) => {
     setSelectedImages((prevSelectedImages) => {
       const updatedSelectedImages = [...prevSelectedImages];
       updatedSelectedImages.splice(index, 1);
       return updatedSelectedImages;
     });
-
     setImageThumbnails((prevThumbnails) => {
       const updatedThumbnails = [...prevThumbnails];
       updatedThumbnails.splice(index, 1);
       return updatedThumbnails;
     });
   };
+
   return (
     <ImageUploadSection>
       <label htmlFor="imageUpload">Schadensbilder hochladen:</label>

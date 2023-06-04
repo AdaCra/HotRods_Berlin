@@ -6,7 +6,23 @@ const FormStyled = styled.form`
     text-align: center;
     width:600px;
     `;
-const FormInput = styled.input`
+const NameInput = styled.input`
+  margin: 0 auto 30px;
+  height: 45px;
+  line-height: 45px;
+  width: 260px;
+  background-color: var(--background);
+  border: 2px solid var(--fontColor-highlight);
+  border-radius: 15px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.2em;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+`;
+const NumberInput = styled.input`
   margin: auto;
   height: 45px;
   line-height: 45px;
@@ -36,22 +52,46 @@ const FormButton = styled.button`
   vertical-align: middle;
   font-size: 1.2em;
 `;
-export default function BenzineForm({ handleSubmit, formName, header, label }) {
+export default function BenzineForm({
+  handleSubmit,
+  formName,
+  header,
+  label,
+  refill,
+}) {
   return (
     <FormStyled onSubmit={handleSubmit} formName={formName}>
       <h3>{header}</h3>
-      <label htmlFor={formName}>
+      <NameInput
+        type="string"
+        name="name"
+        id="name"
+        placeholder="Ihren Name"
+        minLength={3}
+        maxLength={15}
+        required
+      /> 
+      <label htmlFor="count">
         <h4>{label}</h4>
       </label>
       <br />
-      <FormInput
+
+      <NumberInput
         type="number"
         name="count"
-        id={formName}
+        id="count"
         placeholder="0"
         min={0}
         max={10}
         required
+      />
+      <input
+        type="checkbox"
+        name="isRefill"
+        id="isRefill"
+        defaultChecked={refill}
+        value={refill}
+        style={{ visibility: "hidden" }}
       />
       <FormButton type="submit">Absenden</FormButton>
     </FormStyled>
