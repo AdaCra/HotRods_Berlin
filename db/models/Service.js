@@ -6,7 +6,8 @@ const { Schema } = mongoose;
 const serviceSchema = new Schema(
   {
     mechanicName: { type: String, required: true },
-    carId: { type: Schema.Types.ObjectId, ref: "Car", required: true },
+    licensePlateNumber: { type: String },
+    carId: { type: Schema.Types.ObjectId, ref: "Car" },
     odometerReading: { type: Number, required: true },
     serviceIncluded: {
       engine: {

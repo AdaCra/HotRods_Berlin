@@ -1,6 +1,6 @@
 import dbConnect from "@/db/connect";
-import Car from "@/db/models/Car";
 import Service from "@/db/models/Service";
+import Car from "@/db/models/Car";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -17,10 +17,16 @@ export default async function handler(request, response) {
       try {
         const serviceData = request.body;
 
-        const car = await Car.findOne({ _id: serviceData.carId });
+        const car = await Car.findOne({
+          licensePlateNumber: serviceData.licensePlateNumber,
+        });
+
         if (!car) {
           return response.status(404).json({ status: "Car not found" });
         }
+
+        const carID = car._id;
+        serviceData.carId = carID;
 
         const newService = new Service(serviceData);
         const savedService = await newService.save();

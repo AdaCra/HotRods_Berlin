@@ -24,6 +24,7 @@ export default async function handler(request, response) {
         if (!car) {
           return response.status(404).json({ status: "Car not found" });
         }
+        
         const carID = car._id;
         damageReportData.carId = carID;
 
