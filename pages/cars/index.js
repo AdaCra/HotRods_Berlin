@@ -1,3 +1,4 @@
+import Link from "next/link";
 import useSWR from "swr";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -9,27 +10,33 @@ const FixedCar = styled.li`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin: 10px 0;
+  margin: 20px 0;
   padding: 13px 50px;
   height: 50px;
   border-radius: 25px;
   background-color: var(--fontColor-highlight);
-  color: var(--fontColor-onHighlight)
+  color: var(--fontColor-onHighlight);
 `;
 const BrokenCar = styled.li`
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
-margin: 20px 0;
-padding: 13px 50px;
-height: 50px;
-border-radius: 25px;
-background-color: var(--background-highlight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 20px 0;
+  padding: 13px 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: var(--background-highlight);
 `;
 
 const CenterSection = styled.section`
   margin: 20px auto;
+  text-align: center;
+`;
+
+const SuperDiv = styled.div`
+  margin-top: 20px;
+  font-weight: bold;
 `;
 
 export default function Cars() {
@@ -37,11 +44,7 @@ export default function Cars() {
   const { isReady } = router;
   const { data, isLoading, error } = useSWR("/api/cars", { fallbackData: [] });
 
-  if (!isReady || isLoading || error)
-    return (
-      <H2TextPopUp text = "LOADING..."/>
-
-    );
+  if (!isReady || isLoading || error) return <H2TextPopUp text="LOADING..." />;
 
   let carAvailable;
   return (
@@ -59,11 +62,17 @@ export default function Cars() {
                 router.push(`/cars/${car._id}`);
               }}
             >
-              <p>{car.licensePlateNumber}</p>
+              <p>
+                <b>{car.licensePlateNumber}</b>
+              </p>
             </CarComponent>
           );
         })}
       </ul>
+      <hr style={{ margin: "30px 0 25px" }} />
+      <SuperDiv>
+        <Link href={"/cars/create"}>Create Car</Link>
+      </SuperDiv>
     </CenterSection>
   );
 }

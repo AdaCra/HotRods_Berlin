@@ -2,8 +2,8 @@ import { useRouter } from "next/router.js";
 import useSWR from "swr";
 import styled from "styled-components";
 
-import LastElementValue from "@/components/TimeDateValueCalculations/LastElementValue";
-import MostRecentDateFromCreatedAtString from "@/components/TimeDateValueCalculations/MostRecentDateFromCreatedAtString";
+import LastElementValue from "@/components/GeneralComponents/TimeDateValueCalculations/LastElementValue";
+import MostRecentDateFromCreatedAtString from "@/components/GeneralComponents/TimeDateValueCalculations/MostRecentDateFromCreatedAtString";
 import { isDrivable } from "@/components/carIdDamages/isDrivable";
 import ShowDamageReportDetails from "@/components/carIdDamages/ShowDamageReportDetails";
 import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
@@ -11,6 +11,11 @@ import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
 const CenterSection = styled.section`
   margin: 20px auto;
   width: 600px;
+`;
+const ButtonSection = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 const TableStyle = styled.table`
   margin: auto;
@@ -21,6 +26,19 @@ const TableData = styled.td`
   border: 1px solid var(--background-highlight);
   text-align: left;
   vertical-align: center;
+`;
+const FormButton = styled.button`
+  margin: auto;
+  padding: 0;
+  height: 45px;
+  line-height: 45px;
+  width: 120px;
+  background-color: var(--fontColor-highlight);
+  color: var(--background-highlight);
+  border-radius: 15px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.2em;
 `;
 
 export default function DetailsPage() {
@@ -36,6 +54,7 @@ export default function DetailsPage() {
   const { serviceHistory, damageReports } = car;
   const lastDamageType = LastElementValue(damageReports, "type");
 
+ 
   return (
     <>
       <CenterSection>
@@ -91,6 +110,18 @@ export default function DetailsPage() {
             </tr>
           </tbody>
         </TableStyle>
+
+        <hr style={{ margin: "30px 0 25px" }} />
+        <ButtonSection>
+          <FormButton onClick={() => {
+                router.push(`/damageReport`);
+              }}>SCHADEN</FormButton>
+          <FormButton onClick={() => {
+                router.push(`/service`);
+              }}>SERVICE</FormButton>
+        </ButtonSection>
+        <hr style={{ margin: "30px 0 25px" }} />
+
         <ShowDamageReportDetails car={car} />
       </CenterSection>
     </>

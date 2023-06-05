@@ -7,7 +7,6 @@ export default function DamageReport() {
   const { mutate } = useSWR("/api/damage");
 
   async function reportDamage(report) {
-    console.table(report);
     
     const response = await fetch("/api/damage", {
       method: "POST",

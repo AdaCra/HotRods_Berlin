@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TimeDifference from "../TimeDateValueCalculations/TimeDifference";
+import TimeDifference from "../GeneralComponents/TimeDateValueCalculations/TimeDifference";
 import styled from "styled-components";
 import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH3/ExpandingH3WithOnClickToggle";
 import BenzineForm from "./BenzineForm";

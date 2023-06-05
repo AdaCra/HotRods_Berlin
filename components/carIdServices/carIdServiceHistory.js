@@ -1,5 +1,5 @@
 import Image from "next/image";
-import DateFromCreatedAtString from "../TimeDateValueCalculations/DateFromCreatedAtString";
+import DateFromCreatedAtString from "../GeneralComponents/TimeDateValueCalculations/DateFromCreatedAtString";
 import {
   ServiceH4,
   ServiceTableSection,
@@ -52,18 +52,18 @@ export default function CarIdServicehistory({ car }) {
                         ).map(([key, value]) => (
                           <tr key={key}>
                             {value ? (
-                                <>
-                              <ServiceTableBoolYes>                            
-                                <b>✓</b>
-                              </ServiceTableBoolYes>
-                              <ServiceTableDataYes>{key}</ServiceTableDataYes>
+                              <>
+                                <ServiceTableBoolYes>
+                                  <b>✓</b>
+                                </ServiceTableBoolYes>
+                                <ServiceTableDataYes>{key}</ServiceTableDataYes>
                               </>
                             ) : (
-                                <>
-                              <ServiceTableBoolNo>
-                                <b>✕</b>
-                              </ServiceTableBoolNo>
-                              <ServiceTableDataNo>{key}</ServiceTableDataNo>
+                              <>
+                                <ServiceTableBoolNo>
+                                  <b>✕</b>
+                                </ServiceTableBoolNo>
+                                <ServiceTableDataNo>{key}</ServiceTableDataNo>
                               </>
                             )}
                           </tr>

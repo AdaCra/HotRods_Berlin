@@ -9,7 +9,6 @@ import {
   FormSelector,
   FullTextArea,
   FormButton,
-  FormStyled,
 } from "./createDamageForm.style";
 import DamageImageUpload from "./damageImageUpload";
 import { useState } from "react";
@@ -31,14 +30,13 @@ export default function CreateDamageForm({ onSubmit }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    data.isDrivable = isChecked;
     onSubmit(data);
-    console.log(data);
   }
 
   function handleCheckboxChange() {
     setIsChecked(!isChecked);
   }
-  console.log(isChecked);
 
   return (
     <CenterSection>
@@ -59,7 +57,6 @@ export default function CreateDamageForm({ onSubmit }) {
                 max={30}
                 required
               />
-              {/* 2 */}
             </InputDiv>
 
             <InputDiv>
@@ -98,7 +95,6 @@ export default function CreateDamageForm({ onSubmit }) {
             </InputDiv>
 
             <InputDiv style={{ flexDirection: "column" }}>
-              {/* 5 */}
               <label htmlFor="description">Beschreibung des Schadens:</label>
               <FullTextArea
                 placeholder="Schreiben Sie eine kurze Beschreibung des Problems"

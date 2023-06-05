@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import UnorderedAnchorList from "./Lists/UnorderedHeaderList";
+import UnorderedAnchorList from "./Header/UnorderedHeaderList";
 
 const HotrodHeader = styled.header`
   position: relative;
@@ -13,9 +13,9 @@ const HotrodHeader = styled.header`
 export default function Header() {
   const listItemsArray = [
     { title: "Autos", link: "/cars" },
-    { title: "Wetter", link: "/weather" },
-    { title: "Schaden", link: "/damageReport" },
     { title: "Benzine", link: "/benzine" },
+    { title: "Schaden", link: "/damageReport" },
+    { title: "Service", link: "/service" },
     { title: "Unfall", link: "/accident" },
   ];
 

@@ -1,4 +1,4 @@
-import DateFromCreatedAtString from "../TimeDateValueCalculations/DateFromCreatedAtString";
+import DateFromCreatedAtString from "../GeneralComponents/TimeDateValueCalculations/DateFromCreatedAtString";
 
 export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
   const filteredData =
@@ -11,8 +11,8 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
       ).length;
   return (
     <>
-      {dataSet.damageReports &&
-        dataSet.damageReports
+      {dataSet.damageReports.length > 0 ?
+        (dataSet.damageReports
           .slice()
           .reverse()
           .filter((report) =>
@@ -55,7 +55,8 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
                 </section>
               );
             }
-          })}
+          })
+          ):(<p>Whats up Doc</p>)}
     </>
   );
 }

@@ -10,28 +10,28 @@ const serviceSchema = new Schema(
     odometerReading: { type: Number, required: true },
     serviceIncluded: {
       engine: {
-        oil: { type: Boolean, required: true, default: false },
-        coolant: { type: Boolean, required: true, default: false },
-        oilFilter: { type: Boolean, required: true, default: false },
-        airFilter: { type: Boolean, required: true, default: false },
-        fuelFilter: { type: Boolean, required: true, default: false },
-        fanBelt: { type: Boolean, required: true, default: false },
-        timingBelt: { type: Boolean, required: true, default: false },
+        öl: { type: Boolean, required: true, default: false }, //oil
+        Kühlmittel: { type: Boolean, required: true, default: false },//coolant
+        Ölfilter: { type: Boolean, required: true, default: false },//oil Filter
+        Luftfilter: { type: Boolean, required: true, default: false },//air Filter
+        Kraftstofffilter: { type: Boolean, required: true, default: false },//fuel Filter
+        Keilriemen: { type: Boolean, required: true, default: false },//fan Belt
+        Zahnriemen: { type: Boolean, required: true, default: false },//timing Belt
       },
       electrics: {
-        sparkPlugs: { type: Boolean, required: true, default: false },
-        sparkPlugCables: { type: Boolean, required: true, default: false },
-        fuses: { type: Boolean, required: true, default: false },
-        lamps: { type: Boolean, required: true, default: false },
-        battery: { type: Boolean, required: true, default: false },
+        Zündkerzen: { type: Boolean, required: true, default: false },//spark Plugs
+        Zündkerzenkabel: { type: Boolean, required: true, default: false },//spark Plug Cables
+        Sicherungen: { type: Boolean, required: true, default: false },//fuses
+        Lampen: { type: Boolean, required: true, default: false },//lamps
+        Batterie: { type: Boolean, required: true, default: false },//battery
       },
       mechanical: {
-        gasCable: { type: Boolean, required: true, default: false },
-        breakCable: { type: Boolean, required: true, default: false },
-        brakeFluid: { type: Boolean, required: true, default: false },
-        brakePads: { type: Boolean, required: true, default: false },
-        wheelBearings: { type: Boolean, required: true, default: false },
-        tires: { type: Boolean, required: true, default: false },
+        Gaskabel: { type: Boolean, required: true, default: false },//gas Cable
+        Bremskabel: { type: Boolean, required: true, default: false },//break Cable
+        Bremsflüssigkeit: { type: Boolean, required: true, default: false },//brake Fluid
+        Bremsbelagsatz: { type: Boolean, required: true, default: false },//brake Pads
+        Radlager: { type: Boolean, required: true, default: false },//wheel Bearings
+        Reifen: { type: Boolean, required: true, default: false },//tires
       },
     },
   },
@@ -42,3 +42,32 @@ const Service =
   mongoose.models.Service || mongoose.model("Service", serviceSchema);
 
 export default Service;
+
+
+// mechanicName
+//     odometerReading
+//     serviceIncluded
+//       engine
+//         oil
+//         coolant
+//         oil Filter
+//         air Filter
+//         fuel Filter
+//         timing Belt
+//       },
+
+//       electrics: {
+//         spark Plugs
+//         spark Plug Cables
+//         fuses
+//         lamps
+//         battery
+//       },
+//       mechanical: {
+//         gas Cable
+//         break Cable
+//         brake Fluid
+//         brake Pads
+//         wheel Bearings
+//         tires
+//       },
