@@ -1,4 +1,4 @@
-import cloudinary from "cloudinary";
+import cloudinary from 'cloudinary/v2';
 import { useState } from "react";
 
 export function Imageupload() {

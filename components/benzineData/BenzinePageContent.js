@@ -6,7 +6,7 @@ import BenzineForm from "./BenzineForm";
 
 const CenterSection = styled.section`
   margin: 20px auto;
-  width: 600px;
+  max-width: 600px;
   text-align: center;
 `;
 

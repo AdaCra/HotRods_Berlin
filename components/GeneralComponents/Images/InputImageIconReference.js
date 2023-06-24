@@ -23,8 +23,8 @@ export default function InputImageIconReference({ handleFileUpload }) {
       <input
         ref={fileInputRef}
         type="file"
-        id="imageUpload"
-        name="imageUpload"
+        id="photo"
+        name="photo"
         accept=".jpg,.jpeg,.png"
         multiple
         onChange={handleFileUpload}

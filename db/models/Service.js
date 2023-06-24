@@ -11,7 +11,7 @@ const serviceSchema = new Schema(
     odometerReading: { type: Number, required: true },
     serviceIncluded: {
       engine: {
-        öl: { type: Boolean, required: true, default: false }, //oil
+        Öl: { type: Boolean, required: true, default: false }, //oil
         Kühlmittel: { type: Boolean, required: true, default: false },//coolant
         Ölfilter: { type: Boolean, required: true, default: false },//oil Filter
         Luftfilter: { type: Boolean, required: true, default: false },//air Filter

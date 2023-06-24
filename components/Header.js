@@ -8,6 +8,7 @@ const HotrodHeader = styled.header`
   height: 100px;
   border-bottom: 1px solid var(--fontColor-body);
   z-index: 1;
+  width: 100%;
 `;
 
 export default function Header() {

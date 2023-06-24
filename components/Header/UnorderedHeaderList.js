@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { LinkList, ListItem, ListLogo } from "./UnorderedHeaderList.style";
 import ScreenWidthCheck from "../GeneralComponents/ScreenWidthCheck/ScreenWidthCheck";
+import { useRouter } from "next/router";
 
 export default function UnorderedHeaderList({
   cssId,
   cssClass,
   listItemsArray,
 }) {
+  const router = useRouter();
   const displayWidth = ScreenWidthCheck();
   const image = { width: 138, height: 96 };
   switch (true) {
@@ -36,6 +38,7 @@ export default function UnorderedHeaderList({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        width: "100vw",
       }}
     >
       {displayWidth < 490 && (
@@ -71,8 +74,13 @@ export default function UnorderedHeaderList({
         )}
 
         {listItemsArray.map((listItem, i) => (
-          <ListItem key={listItem._id ? listItem._id : i}>
-            <Link href={listItem.link}>{listItem.title.toUpperCase()}</Link>
+          <ListItem
+            key={listItem._id ? listItem._id : i}
+            onClick={() => {
+              router.push(listItem.link);
+            }}
+          >
+            {listItem.title.toUpperCase()}
           </ListItem>
         ))}
       </LinkList>

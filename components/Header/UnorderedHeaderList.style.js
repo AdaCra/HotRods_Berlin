@@ -22,6 +22,7 @@ export const LinkList = styled.header`
 `;
 
 export const ListItem = styled.li`
+cursor: pointer;
   font-family: "Roboto Condensed", Helvetica, Arial, Verdana, sans-serif;
   font-weight: bold;
   font-size: 24px

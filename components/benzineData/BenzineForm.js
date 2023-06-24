@@ -4,7 +4,7 @@ const FormStyled = styled.form`
     display: flex
     flex-direction:column;
     text-align: center;
-    width:600px;
+    max-width:600px;
     `;
 const NameInput = styled.input`
   margin: 0 auto 30px;

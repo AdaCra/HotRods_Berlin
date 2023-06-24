@@ -23,7 +23,6 @@ export default function DamageReport() {
       console.log(`Error: ${response.status}`);
     }}
 
-    // router.push("/damageReport");
   
 
   return <CreateDamageForm onSubmit={reportDamage} />;

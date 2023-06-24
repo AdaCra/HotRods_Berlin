@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const CheckboxStyle = styled.input`
   appearance: none;
@@ -33,19 +33,43 @@ const CheckboxStyle = styled.input`
     font-weight: bold;
     color: var(--background);
   }
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: default;
+      filter: grayscale(100%);
+      opacity: 0.5;
+    `}
 `;
 
-export default function Checkbox({ name, value, onChange }) {
+const Label = styled.label`
+  /* Label styles */
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: default;
+      filter: grayscale(100%);
+      opacity: 0.5;
+    `}
+`;
+
+export default function Checkbox({ label, name, value, onChange, disabled }) {
   return (
-    <div>
-      <CheckboxStyle
-        type="checkbox"
-        name={name}
-        id={name}
-        value={value}
-        defaultChecked={true}
-        onChange={onChange}
-      />
-    </div>
+    <>
+      <Label htmlFor={name} disabled={disabled}>
+        {label}
+      </Label>
+      <div>
+        <CheckboxStyle
+          type="checkbox"
+          name={name}
+          id={name}
+          value={disabled ? !value : value}
+          defaultChecked={value}
+          onChange={onChange}
+          disabled={disabled}
+        />
+      </div>
+    </>
   );
 }

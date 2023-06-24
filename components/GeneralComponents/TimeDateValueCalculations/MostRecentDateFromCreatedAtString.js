@@ -4,5 +4,5 @@ export default function MostRecentDateFromCreatedAtString(data) {
     const formattedDate = createAtTimestamp.toLocaleDateString("en-GB");
     return formattedDate;
   }
-  return "Es wurden keine Dienste geladen";
+  return "Keine Daten gefunden";
 }
