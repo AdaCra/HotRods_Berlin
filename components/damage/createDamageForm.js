@@ -9,12 +9,14 @@ import {
   FormSelector,
   FullTextArea,
   FormButton,
+  FormStyled,
 } from "./createDamageForm.style";
 import DamageImageUpload from "./damageImageUpload";
 import { useState } from "react";
 
 export default function CreateDamageForm({ onSubmit }) {
-  const [isChecked, setIsChecked] = useState(true);
+  const [isDrivableCheck, setIsDrivableCheck] = useState(true);
+  const [isAffectsDrivingCheck, setIsAffectsDrivingCheck] = useState(false);
   const router = useRouter();
   const { isReady } = router;
   const {
@@ -22,27 +24,34 @@ export default function CreateDamageForm({ onSubmit }) {
     isLoading: carLoading,
     error: carError,
   } = useSWR("/api/cars", { fallbackData: [] });
-
+  let ImageUploadArray;
   if (!isReady || carLoading || carError)
     return <H2TextPopUp text="LOADING..." />;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    data.isDrivable = isChecked;
+    data.isDrivable = isDrivableCheck;
+    data.isAffectsDriving = isAffectsDrivingCheck;
+    data.photo = ImageUploadArray;
     onSubmit(data);
+
+    const car = cars.find(
+      (car) => car.licensePlateNumber === data.licensePlateNumber
+    );
+    router.push(`/cars/${car._id}`);
   }
 
-  function handleCheckboxChange() {
-    setIsChecked(!isChecked);
+  function handleCheckboxChange(set, is) {
+    set(!is);
   }
 
   return (
     <CenterSection>
       <h2>SCHADENSBERICHT ERSTELLEN</h2>
       <section>
-        <form onSubmit={handleSubmit} formname="damagereports">
+        <FormStyled onSubmit={handleSubmit} formname="damagereports">
           <fieldset>
             <legend>
               <h3>SCHADENFORMULAR</h3>
@@ -76,11 +85,28 @@ export default function CreateDamageForm({ onSubmit }) {
             </InputDiv>
 
             <InputDiv>
-              <label htmlFor="isDrivable">Ist das Auto noch fahrbar?:</label>
               <Checkbox
+                label={"Ist das Auto noch fahrbar?:"}
                 name={"isDrivable"}
-                value={isChecked}
-                onChange={handleCheckboxChange}
+                value={isDrivableCheck}
+                onChange={() =>
+                  handleCheckboxChange(setIsDrivableCheck, isDrivableCheck)
+                }
+                disabled={false}
+              />
+            </InputDiv>
+            <InputDiv>
+              <Checkbox
+                label={"Der Schaden beeinträchtigt das Fahrverhalten?:"}
+                name={"isAffectsDriving"}
+                value={isAffectsDrivingCheck}
+                onChange={() =>
+                  handleCheckboxChange(
+                    setIsAffectsDrivingCheck,
+                    isAffectsDrivingCheck
+                  )
+                }
+                disabled={!isDrivableCheck}
               />
             </InputDiv>
 
@@ -88,9 +114,9 @@ export default function CreateDamageForm({ onSubmit }) {
               <label htmlFor="type">Art des Schadens:</label>
               <FormSelector id="type" name="type">
                 <option value="">--- Bitte auswählen ---</option>
-                <option value={"body"}>Karosserie</option>
-                <option value={"electrical"}>Elektrisch</option>
-                <option value={"mechanical"}>Mechanisch</option>
+                <option value={"Karosserie"}>Karosserie</option>
+                <option value={"Elektrisch"}>Elektrisch</option>
+                <option value={"Mechanisch"}>Mechanisch</option>
               </FormSelector>
             </InputDiv>
 
@@ -105,14 +131,14 @@ export default function CreateDamageForm({ onSubmit }) {
               />
             </InputDiv>
             <InputDiv>
-              <DamageImageUpload />
+              <DamageImageUpload ImageArray={ImageUploadArray} />
             </InputDiv>
 
             <InputDiv style={{ textAlign: "center" }}>
               <FormButton type="submit">Absenden</FormButton>
             </InputDiv>
           </fieldset>
-        </form>
+        </FormStyled>
       </section>
     </CenterSection>
   );

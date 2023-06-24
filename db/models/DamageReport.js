@@ -6,18 +6,22 @@ const { Schema } = mongoose;
 
 const damageReportSchema = new Schema(
   {
-    reporterName: { type: String },
-    licensePlateNumber: { type: String },
-    carId: { type: Schema.Types.ObjectId, ref: "Car" },
-    isDrivable: { type: Boolean, default: true },
+    reporterName: { type: String, required: true },
+    licensePlateNumber: { type: String, required: true },
+    carId: { type: Schema.Types.ObjectId, ref: "Car", required: true },
+    isDrivable: { type: Boolean, default: true, required: true },
+    isAffectsDriving: { type: Boolean, default: false, required: true },
     type: {
       type: String,
-      enum: ["body", "mechanical", "electrical"],
+      enum: ["Mechanisch", "Elektrisch", "Karosserie"],
+      required: true,
     },
-    description: { type: String, max: 170 },
+    description: { type: String, max: 170, required: true },
     photo: { type: String },
+    updatedBy: { type: String },
     isResolved: { type: Boolean, default: false },
     resolvedDate: { type: Date },
+    resolvedBy: { type: String },
   },
   { timestamps: { createdAt: true, updatedAt: true } }
 );

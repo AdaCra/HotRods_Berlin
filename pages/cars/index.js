@@ -46,13 +46,12 @@ export default function Cars() {
 
   if (!isReady || isLoading || error) return <H2TextPopUp text="LOADING..." />;
 
-  let carAvailable;
   return (
     <CenterSection>
       <h2>AUTO LISTE</h2>
       <ul>
         {data.map((car) => {
-          carAvailable = isDrivable(car);
+          const carAvailable = isDrivable(car);
           const CarComponent = carAvailable ? FixedCar : BrokenCar;
           return (
             <CarComponent
@@ -71,7 +70,9 @@ export default function Cars() {
       </ul>
       <hr style={{ margin: "30px 0 25px" }} />
       <SuperDiv>
-        <Link href={"/cars/create"}>Create Car</Link>
+        <h2>
+          <Link href={"/cars/create"}>AUTO HINZUFLÜGEN</Link>
+        </h2>
       </SuperDiv>
     </CenterSection>
   );

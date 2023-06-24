@@ -15,7 +15,7 @@ const ImageThumbnailSection = styled.section`
   border: 1px solid var(--fontColor-highlight);
 `;
 
-export default function DamageImageUpload() {
+export default function DamageImageUpload({ ImageArray }) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [imageThumbnails, setImageThumbnails] = useState([]);
 
@@ -23,8 +23,10 @@ export default function DamageImageUpload() {
     const files = Array.from(event.target.files);
     if (selectedImages.length + files.length > 4) {
       // Limit the total number of images to 4
-      return;
-    }
+      return (ImageArray = files);
+    } 
+
+  console.log(files)
 
     const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
 
@@ -63,7 +65,7 @@ export default function DamageImageUpload() {
 
   return (
     <ImageUploadSection>
-      <label htmlFor="imageUpload">Schadensbilder hochladen:</label>
+      <label htmlFor="photo">Schadensbilder hochladen:</label>
       <ImageThumbnailSection>
         <ImageUploadPreviews
           selectedImages={selectedImages}

@@ -1,30 +1,27 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const CenterSection = styled.section`
-  margin: 20px auto;
+  margin: 15px auto;
   width: 600px;
 `;
 export const FormStyled = styled.form`
-    display: flex
-    flex-direction:column;
-    text-align: center;
-    width:600px;
-    `;
+  padding: 0 20px;
+`;
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 10px;
 `;
 export const FormInput = styled.input`
-  width: 250px;
+  width: 200px;
   background-color: var(--background);
   border: 1.5px solid var(--fontColor-highlight);
   text-align: center;
 `;
 
 export const FormSelector = styled.select`
-  width: 250px;
+  width: 200px;
   background-color: var(--background);
   border: 1.5px solid var(--fontColor-highlight);
   text-align: center;
@@ -51,3 +48,6 @@ export const FormButton = styled.button`
   vertical-align: middle;
   font-size: 1.2em;
 `;
+
+export const DisabledLabel = styled.label`
+color: var{--background-highlight};`

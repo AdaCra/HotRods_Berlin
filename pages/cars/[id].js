@@ -10,7 +10,8 @@ import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
 
 const CenterSection = styled.section`
   margin: 20px auto;
-  width: 600px;
+  width: 640px;
+  padding: 0 20px;
 `;
 const ButtonSection = styled.section`
   display: flex;
@@ -53,8 +54,8 @@ export default function DetailsPage() {
   const carAvailable = isDrivable(car);
   const { serviceHistory, damageReports } = car;
   const lastDamageType = LastElementValue(damageReports, "type");
+  const lastDamageSeverity = LastElementValue(damageReports, "isDrivable")
 
- 
   return (
     <>
       <CenterSection>
@@ -69,7 +70,9 @@ export default function DetailsPage() {
             <tr>
               <TableData>Ist fahrbar</TableData>
               <TableData>
-                {carAvailable ? "Ist fahrbar" : "Warten auf Reparaturen"}
+                {carAvailable
+                  ? "Es fährt immer noch"
+                  : "Warten auf Reparaturen"}
               </TableData>
             </tr>
           </tbody>
@@ -86,10 +89,26 @@ export default function DetailsPage() {
             <tr>
               <TableData>Beim Kilometerstand</TableData>
               <TableData>
-                {LastElementValue(serviceHistory, "odometerReading")}km
+                {LastElementValue(serviceHistory, "odometerReading") === "null"
+                  ? ""
+                  : `${LastElementValue(serviceHistory, "odometerReading")}km`}
               </TableData>
             </tr>
-
+            <tr>
+              <TableData>Nächste Wartung</TableData>
+              <TableData>
+                {LastElementValue(serviceHistory, "odometerReading") === "null"
+                  ? "1500km"
+                  : `${
+                      LastElementValue(serviceHistory, "odometerReading") + 1500
+                    }km`}
+              </TableData>
+            </tr>
+          </tbody>
+        </TableStyle>
+        <br />
+        <TableStyle>
+          <tbody style={{ marginTop: "10px" }}>
             <tr>
               <TableData>Letzte Schadensmeldung</TableData>
               <TableData>
@@ -98,27 +117,31 @@ export default function DetailsPage() {
             </tr>
             <tr>
               <TableData>Art des Schadens</TableData>
-              <TableData>
-                {lastDamageType === "mechanical"
-                  ? "Mechanisch"
-                  : lastDamageType === "electrical"
-                  ? "Elektrisch"
-                  : lastDamageType === "body"
-                  ? "Karosserie"
-                  : "Unbekannt"}
-              </TableData>
+              <TableData>{lastDamageType}</TableData>
+            </tr>
+            <tr>
+              <TableData>Funktionsunfähige Schäden</TableData>
+              <TableData>{lastDamageSeverity ? "Nein":"Ja"}</TableData>
             </tr>
           </tbody>
         </TableStyle>
 
         <hr style={{ margin: "30px 0 25px" }} />
         <ButtonSection>
-          <FormButton onClick={() => {
-                router.push(`/damageReport`);
-              }}>SCHADEN</FormButton>
-          <FormButton onClick={() => {
-                router.push(`/service`);
-              }}>SERVICE</FormButton>
+          <FormButton
+            onClick={() => {
+              router.push(`/damageReport`);
+            }}
+          >
+            SCHADEN
+          </FormButton>
+          <FormButton
+            onClick={() => {
+              router.push(`/service`);
+            }}
+          >
+            SERVICE
+          </FormButton>
         </ButtonSection>
         <hr style={{ margin: "30px 0 25px" }} />
 

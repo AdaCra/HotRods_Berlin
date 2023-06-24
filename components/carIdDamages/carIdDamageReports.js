@@ -11,8 +11,8 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
       ).length;
   return (
     <>
-      {dataSet.damageReports.length > 0 ?
-        (dataSet.damageReports
+      {dataSet.damageReports.length > 0 ? (
+        dataSet.damageReports
           .slice()
           .reverse()
           .filter((report) =>
@@ -25,13 +25,7 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
               return (
                 <section key={report._id}>
                   <h4>
-                    {report.type === "mechanical"
-                      ? "Mechanische"
-                      : report.type === "body"
-                      ? "Karosserie"
-                      : report.type === "electrical"
-                      ? "Electrische"
-                      : "unbekannte"}
+                    {report.type}
                     schäden - {DateFromCreatedAtString(report.createdAt)}
                   </h4>
                   <section>
@@ -51,12 +45,15 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
                         </tr>
                       </tbody>
                     </table>
+                  <hr style={{ margin: "30px 0 25px" }} />
                   </section>
                 </section>
               );
             }
           })
-          ):(<p>Whats up Doc</p>)}
+      ) : (
+        <p>Es gibt keine Schadens</p>
+      )}
     </>
   );
 }

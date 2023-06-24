@@ -134,7 +134,7 @@ export default function CreateCars() {
                   id="licensePlatePrefix"
                   placeholder="BAA"
                   minLength={3}
-                  maxLength={3}
+                  maxLength={4}
                   required
                 />
                 <NumberInput
