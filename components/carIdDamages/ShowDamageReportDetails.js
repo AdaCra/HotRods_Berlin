@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CarIdDamageReports from "./carIdDamageReports";
-import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH3/ExpandingH3WithOnClickToggle";
+import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH/ExpandingH3WithOnClickToggle";
 import CarIdServicehistory from "../carIdServices/carIdServiceHistory";
 
 export default function ShowUnresolvedDamageDetails({ car }) {

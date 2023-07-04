@@ -33,14 +33,20 @@ export default function CreateDamageForm({ onSubmit }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     data.isDrivable = isDrivableCheck;
-    data.isAffectsDriving = isAffectsDrivingCheck;
-    data.photo = ImageUploadArray;
+    data.isAffectsDriving = !isDrivableCheck ? true : isAffectsDrivingCheck;
+    data.photos = [
+      "https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1602777924012-f8664ffeed27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+    ];
     onSubmit(data);
-
-    const car = cars.find(
+    const carRoute = cars.find(
       (car) => car.licensePlateNumber === data.licensePlateNumber
     );
-    router.push(`/cars/${car._id}`);
+    // router.push(`/cars/${carRoute._id}`);
+    // console.log("isDrivableCheck:", data.isDrivable);
+    // console.log("isAffectsDrivingCheck:", data.isAffectsDriving);
   }
 
   function handleCheckboxChange(set, is) {
@@ -70,7 +76,11 @@ export default function CreateDamageForm({ onSubmit }) {
 
             <InputDiv>
               <label htmlFor="licensePlateNumber">Autonummernschild: </label>
-              <FormSelector id="licensePlateNumber" name="licensePlateNumber">
+              <FormSelector
+                id="licensePlateNumber"
+                name="licensePlateNumber"
+                required
+              >
                 <>
                   <option value="">--- Bitte auswählen ---</option>
                   {cars.map((car) => {
@@ -95,24 +105,27 @@ export default function CreateDamageForm({ onSubmit }) {
                 disabled={false}
               />
             </InputDiv>
-            <InputDiv>
-              <Checkbox
-                label={"Der Schaden beeinträchtigt das Fahrverhalten?:"}
-                name={"isAffectsDriving"}
-                value={isAffectsDrivingCheck}
-                onChange={() =>
-                  handleCheckboxChange(
-                    setIsAffectsDrivingCheck,
-                    isAffectsDrivingCheck
-                  )
-                }
-                disabled={!isDrivableCheck}
-              />
-            </InputDiv>
+
+            {isDrivableCheck && (
+              <InputDiv>
+                <Checkbox
+                  label={"Der Schaden beeinträchtigt das Fahrverhalten?:"}
+                  name={"isAffectsDriving"}
+                  value={isAffectsDrivingCheck}
+                  onChange={() =>
+                    handleCheckboxChange(
+                      setIsAffectsDrivingCheck,
+                      isAffectsDrivingCheck
+                    )
+                  }
+                  disabled={!isDrivableCheck}
+                />
+              </InputDiv>
+            )}
 
             <InputDiv>
               <label htmlFor="type">Art des Schadens:</label>
-              <FormSelector id="type" name="type">
+              <FormSelector id="type" name="type" required>
                 <option value="">--- Bitte auswählen ---</option>
                 <option value={"Karosserie"}>Karosserie</option>
                 <option value={"Elektrisch"}>Elektrisch</option>
@@ -128,6 +141,7 @@ export default function CreateDamageForm({ onSubmit }) {
                 id="description"
                 minLength={10}
                 maxLength={130}
+                required
               />
             </InputDiv>
             <InputDiv>

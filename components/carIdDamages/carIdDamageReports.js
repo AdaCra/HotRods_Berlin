@@ -1,3 +1,4 @@
+import SectionDivider from "../GeneralComponents/HorizontalRule/HrSectionSpacer";
 import DateFromCreatedAtString from "../GeneralComponents/TimeDateValueCalculations/DateFromCreatedAtString";
 
 export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
@@ -11,17 +12,18 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
       ).length;
   return (
     <>
-      {dataSet.damageReports.length > 0 ? (
+      {filteredData > 0 ? (
         dataSet.damageReports
           .slice()
           .reverse()
           .filter((report) =>
             resolvedFilter ? report.isResolved : !report.isResolved
           )
-          .map((report) => {
-            if (filteredData === 0) {
+          .map((report, index) => {
+            if (filteredData.length === 0) {
               return `Es gibt keine ${title} Berichte`;
             } else if (filteredData > 0) {
+
               return (
                 <section key={report._id}>
                   <h4>
@@ -33,7 +35,7 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
                       <tbody>
                         <tr>
                           <td>Auto noch fahrbar</td>
-                          <td>{report.isDrivable ? "Ja" : "Nein"}</td>
+                          <td>{report.isAffectsDriving ? "Jain " : report.isDrivable ? "Nein" : "Ja"}</td>
                         </tr>
                         <tr>
                           <td>Bericht von</td>
@@ -45,7 +47,7 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
                         </tr>
                       </tbody>
                     </table>
-                  <hr style={{ margin: "30px 0 25px" }} />
+                    <SectionDivider/>
                   </section>
                 </section>
               );

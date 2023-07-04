@@ -4,14 +4,21 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { isDrivable } from "@/components/carIdDamages/isDrivable";
 import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
+import SectionDivider from "@/components/GeneralComponents/HorizontalRule/HrSectionSpacer";
 
+const CenterSection = styled.section`
+  margin: 15px auto;
+  padding: 0 15px;
+  width: 600px;
+`;
 const FixedCar = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 13px 50px;
+  max-width: 200px;
   height: 50px;
   border-radius: 25px;
   background-color: var(--fontColor-highlight);
@@ -22,21 +29,34 @@ const BrokenCar = styled.li`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 13px 50px;
+  max-width: 200px;
   height: 50px;
   border-radius: 25px;
   background-color: var(--background-highlight);
 `;
-
-const CenterSection = styled.section`
-  margin: 20px auto;
-  text-align: center;
+const DamagedCar = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px 0;
+  padding: 13px 50px;
+  max-width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: var(--background-highlight);
+  box-shadow: inset 0px 0px 10px 5px var(--fontColor-highlight);
 `;
 
-const SuperDiv = styled.div`
-  margin-top: 20px;
-  font-weight: bold;
+const GridUL = styled.ul`
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  justify-items: center;
+  align-items: center;
 `;
 
 export default function Cars() {
@@ -49,10 +69,15 @@ export default function Cars() {
   return (
     <CenterSection>
       <h2>AUTO LISTE</h2>
-      <ul>
+      <GridUL>
         {data.map((car) => {
           const carAvailable = isDrivable(car);
-          const CarComponent = carAvailable ? FixedCar : BrokenCar;
+          const CarComponent =
+            carAvailable === null
+              ? DamagedCar
+              : carAvailable === true
+              ? FixedCar
+              : BrokenCar;
           return (
             <CarComponent
               key={car._id}
@@ -67,13 +92,13 @@ export default function Cars() {
             </CarComponent>
           );
         })}
-      </ul>
-      <hr style={{ margin: "30px 0 25px" }} />
-      <SuperDiv>
+      </GridUL>
+      <SectionDivider />
+      <div>
         <h2>
           <Link href={"/cars/create"}>AUTO HINZUFLÜGEN</Link>
         </h2>
-      </SuperDiv>
+      </div>
     </CenterSection>
   );
 }

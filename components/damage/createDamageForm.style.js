@@ -1,7 +1,8 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const CenterSection = styled.section`
   margin: 15px auto;
+  padding: 0 15px;
   width: 600px;
 `;
 export const FormStyled = styled.form`
@@ -50,4 +51,4 @@ export const FormButton = styled.button`
 `;
 
 export const DisabledLabel = styled.label`
-color: var{--background-highlight};`
+color: var{--background-highlight};`;

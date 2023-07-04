@@ -4,11 +4,10 @@ export function isDrivable(car) {
   );
 
   const unresolvedNonCosmetic = car.damageReports.filter(
-    (report) => !report.isResolved && !report.type === "Kosmetik"
+    (report) =>
+      !report.isResolved && report.isAffectsDriving && report.isDrivable
   );
-  if (unresolvedUndrivable.length === 0) {
-    return true;
-  } else {
-    return false;
-  }
+  if (unresolvedNonCosmetic.length > 0) return null;
+  else if (unresolvedUndrivable.length === 0) return true;
+  else return false;
 }

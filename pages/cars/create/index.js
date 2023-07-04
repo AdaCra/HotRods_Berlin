@@ -6,6 +6,7 @@ import useSWR from "swr";
 const CenterSection = styled.section`
   margin: 20px auto;
   width: 400px;
+  padding: 0 15px;
   text-align: center;
 `;
 export const FormButton = styled.button`
@@ -38,10 +39,7 @@ const PrefixInput = styled.input`
   text-align: center;
   vertical-align: middle;
   font-size: 1.2em;
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-  }
+
   &:focus {
     outline: none;
     box-shadow: none;
@@ -109,8 +107,8 @@ export default function CreateCars() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     const licensePlate = {
-      licensePlateNumber: `${
-        data.licensePlatePrefix + " " + data.licensePlateDigits
+      licensePlateNumber: `${data.licensePlatePrefix.toUpperCase()} ${
+        data.licensePlateDigits
       }`,
     };
     AddCar(licensePlate);
@@ -132,18 +130,19 @@ export default function CreateCars() {
                   type="text"
                   name="licensePlatePrefix"
                   id="licensePlatePrefix"
-                  placeholder="BAA"
+                  placeholder="AAA"
+                  pattern="[A-Za-z]+"
                   minLength={3}
-                  maxLength={4}
+                  maxLength={3}
                   required
                 />
                 <NumberInput
                   type="number"
                   name="licensePlateDigits"
                   id="licensePlateDigits"
-                  placeholder="9999"
+                  placeholder="999"
                   min={0}
-                  max={9999}
+                  max={999}
                   required
                 />
               </InputDiv>

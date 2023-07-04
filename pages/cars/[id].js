@@ -7,6 +7,7 @@ import MostRecentDateFromCreatedAtString from "@/components/GeneralComponents/Ti
 import { isDrivable } from "@/components/carIdDamages/isDrivable";
 import ShowDamageReportDetails from "@/components/carIdDamages/ShowDamageReportDetails";
 import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
+import SectionDivider from "@/components/GeneralComponents/HorizontalRule/HrSectionSpacer";
 
 const CenterSection = styled.section`
   margin: 20px auto;
@@ -126,7 +127,7 @@ export default function DetailsPage() {
           </tbody>
         </TableStyle>
 
-        <hr style={{ margin: "30px 0 25px" }} />
+        <SectionDivider/>
         <ButtonSection>
           <FormButton
             onClick={() => {
@@ -143,7 +144,7 @@ export default function DetailsPage() {
             SERVICE
           </FormButton>
         </ButtonSection>
-        <hr style={{ margin: "30px 0 25px" }} />
+        <SectionDivider/>
 
         <ShowDamageReportDetails car={car} />
       </CenterSection>
