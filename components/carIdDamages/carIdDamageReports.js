@@ -1,7 +1,17 @@
+import styled from "styled-components";
 import SectionDivider from "../GeneralComponents/HorizontalRule/HrSectionSpacer";
+import TableRow from "../GeneralComponents/TableRow/TableRow";
 import DateFromCreatedAtString from "../GeneralComponents/TimeDateValueCalculations/DateFromCreatedAtString";
 
+const breakingDamage = styled.table`
+border-color: red`
+const partialDamage = styled.table`
+border-color: yellow`
+const noDamage = styled.table`
+border-color: green`
+
 export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
+  
   const filteredData =
     dataSet.damageReports &&
     dataSet.damageReports
@@ -23,7 +33,6 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
             if (filteredData.length === 0) {
               return `Es gibt keine ${title} Berichte`;
             } else if (filteredData > 0) {
-
               return (
                 <section key={report._id}>
                   <h4>
@@ -33,21 +42,27 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
                   <section>
                     <table>
                       <tbody>
-                        <tr>
-                          <td>Auto noch fahrbar</td>
-                          <td>{report.isAffectsDriving ? "Jain " : report.isDrivable ? "Nein" : "Ja"}</td>
-                        </tr>
-                        <tr>
-                          <td>Bericht von</td>
-                          <td>{report.reporterName}</td>
-                        </tr>
-                        <tr>
-                          <td>Schadensbeschreibung</td>
-                          <td>{report.description}</td>
-                        </tr>
+                        <TableRow
+                          keyName={"Dieser Schaden macht das Auto kaputt"}
+                          keyValue={!report.isDrivable ? "Nein" : "Ja"}
+                        />
+                        <TableRow
+                          keyName={
+                            "Dieser Schaden macht das Auto unzuverlässig"
+                          }
+                          keyValue={!report.isDrivable ? "Nein" : "Ja"}
+                        />
+                        <TableRow
+                          keyName={"Bericht von"}
+                          keyValue={report.reporterName}
+                        />
+                        <TableRow
+                          keyName={"Schadensbeschreibung"}
+                          keyValue={report.description}
+                        />
                       </tbody>
                     </table>
-                    <SectionDivider/>
+                    <SectionDivider />
                   </section>
                 </section>
               );
@@ -58,4 +73,10 @@ export default function CarIdDamageReports({ dataSet, resolvedFilter, title }) {
       )}
     </>
   );
+}
+{
+  /* <TableRow
+              keyName={""}
+              keyValue={""}
+            />   */
 }

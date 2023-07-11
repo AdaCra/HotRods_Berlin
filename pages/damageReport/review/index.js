@@ -9,7 +9,7 @@ import CarDamageReview from "@/components/damage/DamagereviewTable";
 const CenterSection = styled.section`
   margin: 15px auto;
   padding: 0 15px;
-  width: 600px;
+  width: 800px;
 `;
 
 export default function DamagesReview() {

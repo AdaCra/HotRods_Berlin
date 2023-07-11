@@ -8,6 +8,7 @@ import { isDrivable } from "@/components/carIdDamages/isDrivable";
 import ShowDamageReportDetails from "@/components/carIdDamages/ShowDamageReportDetails";
 import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
 import SectionDivider from "@/components/GeneralComponents/HorizontalRule/HrSectionSpacer";
+import TableRow from "@/components/GeneralComponents/TableRow/TableRow";
 
 const CenterSection = styled.section`
   margin: 20px auto;
@@ -55,7 +56,8 @@ export default function DetailsPage() {
   const carAvailable = isDrivable(car);
   const { serviceHistory, damageReports } = car;
   const lastDamageType = LastElementValue(damageReports, "type");
-  const lastDamageSeverity = LastElementValue(damageReports, "isDrivable")
+  const lastDamageSeverity = LastElementValue(damageReports, "isDrivable");
+  const lastDamageAffects = LastElementValue(damageReports, "isAffectsDriving");
 
   return (
     <>
@@ -64,70 +66,68 @@ export default function DetailsPage() {
         <h3>ALLGEMEIN</h3>
         <TableStyle>
           <tbody>
-            <tr>
-              <TableData>Nummernschild</TableData>
-              <TableData>{car.licensePlateNumber}</TableData>
-            </tr>
-            <tr>
-              <TableData>Ist fahrbar</TableData>
-              <TableData>
-                {carAvailable
-                  ? "Es fährt immer noch"
-                  : "Warten auf Reparaturen"}
-              </TableData>
-            </tr>
+            <TableRow
+              keyName={"Nummernschild"}
+              keyValue={car.licensePlateNumber}
+            />
+            <TableRow
+              keyName={"Ist fahrbar"}
+              keyValue={
+                carAvailable === null
+                  ? "Warten auf Reparaturen"
+                  : carAvailable === false
+                  ? "Auto ist ganz Kapputt"
+                  : "Es fährt immer noch"
+              }
+            />
           </tbody>
         </TableStyle>
         <h3>WARTUNGSVERLAUF</h3>
         <TableStyle>
           <tbody>
-            <tr>
-              <TableData>Letzter Autoservice am</TableData>
-              <TableData>
-                {MostRecentDateFromCreatedAtString(serviceHistory)}
-              </TableData>
-            </tr>
-            <tr>
-              <TableData>Beim Kilometerstand</TableData>
-              <TableData>
-                {LastElementValue(serviceHistory, "odometerReading") === "null"
+            <TableRow
+              keyName={"Letzter Autoservice am"}
+              keyValue={MostRecentDateFromCreatedAtString(serviceHistory)}
+            />
+
+            <TableRow
+              keyName={"Beim Kilometerstand"}
+              keyValue={
+                LastElementValue(serviceHistory, "odometerReading") === "null"
                   ? ""
-                  : `${LastElementValue(serviceHistory, "odometerReading")}km`}
-              </TableData>
-            </tr>
-            <tr>
-              <TableData>Nächste Wartung</TableData>
-              <TableData>
-                {LastElementValue(serviceHistory, "odometerReading") === "null"
+                  : `${LastElementValue(serviceHistory, "odometerReading")}km`
+              }
+            />
+            <TableRow
+              keyName={"Nächste Wartung"}
+              keyValue={
+                LastElementValue(serviceHistory, "odometerReading") === "null"
                   ? "1500km"
                   : `${
                       LastElementValue(serviceHistory, "odometerReading") + 1500
-                    }km`}
-              </TableData>
-            </tr>
+                    }km`
+              }
+            />
           </tbody>
         </TableStyle>
         <br />
         <TableStyle>
           <tbody style={{ marginTop: "10px" }}>
-            <tr>
-              <TableData>Letzte Schadensmeldung</TableData>
-              <TableData>
-                {MostRecentDateFromCreatedAtString(damageReports)}
-              </TableData>
-            </tr>
-            <tr>
-              <TableData>Art des Schadens</TableData>
-              <TableData>{lastDamageType}</TableData>
-            </tr>
-            <tr>
-              <TableData>Funktionsunfähige Schäden</TableData>
-              <TableData>{lastDamageSeverity ? "Nein":"Ja"}</TableData>
-            </tr>
+            <TableRow
+              keyName={"Letzte Schadensmeldung"}
+              keyValue={MostRecentDateFromCreatedAtString(damageReports)}
+            />
+
+            <TableRow keyName={"Art des Schadens"} keyValue={lastDamageType} />
+
+            <TableRow
+              keyName={"Funktionsunfähige Schäden"}
+              keyValue={lastDamageSeverity ? "Nein" : "Ja"}
+            />
           </tbody>
         </TableStyle>
 
-        <SectionDivider/>
+        <SectionDivider />
         <ButtonSection>
           <FormButton
             onClick={() => {
@@ -144,7 +144,7 @@ export default function DetailsPage() {
             SERVICE
           </FormButton>
         </ButtonSection>
-        <SectionDivider/>
+        <SectionDivider />
 
         <ShowDamageReportDetails car={car} />
       </CenterSection>

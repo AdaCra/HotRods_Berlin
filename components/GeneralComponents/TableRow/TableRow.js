@@ -16,7 +16,7 @@ const TableData = styled.td`
 
 const FullWidthCell = styled.td`
   width: 100%;
-  padding-left: 10px;
+  padding: 10px;
   border: 1px solid var(--background-highlight);
   text-align: center;
   vertical-align: center;
@@ -42,7 +42,7 @@ export default function TableRow({ keyName, keyValue, Click }) {
         </>
       ) : (
         <FullWidthCell colSpan="2" onClick={Click}>
-          <h4>{keyName || keyValue}</h4>
+          <h4>{keyValue}</h4>
         </FullWidthCell>
       )}
     </tr>

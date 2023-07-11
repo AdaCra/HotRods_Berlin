@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { isDrivable } from "@/components/carIdDamages/isDrivable";
 import H2TextPopUp from "@/components/GeneralComponents/Loading/Loading";
 import SectionDivider from "@/components/GeneralComponents/HorizontalRule/HrSectionSpacer";
+import { useState } from "react";
 
 const CenterSection = styled.section`
   margin: 15px auto;
@@ -75,9 +76,9 @@ export default function Cars() {
           const CarComponent =
             carAvailable === null
               ? DamagedCar
-              : carAvailable === true
-              ? FixedCar
-              : BrokenCar;
+              : carAvailable === false
+              ? BrokenCar
+              : FixedCar;
           return (
             <CarComponent
               key={car._id}
