@@ -1,14 +1,14 @@
 export function isDrivable(car) {
-  const unresolvedUndrivable = car.damageReports.filter(
+  const undrivable = car.damageReports.filter(
     (report) => !report.isResolved && !report.isDrivable
   );
 
-  const unresolvedNonCosmetic = car.damageReports.filter(
-    (report) => !report.isResolved && !report.type === "Kosmetik"
+  const drivingAffected = car.damageReports.filter(
+    (report) =>
+      !report.isResolved && report.isDrivable && report.isAffectsDriving
   );
-  if (unresolvedUndrivable.length === 0) {
-    return true;
-  } else {
-    return false;
-  }
+  console.table(drivingAffected);
+  if (drivingAffected.length > 0) return false;
+  else if (undrivable.length > 0) return null;
+  else return true;
 }

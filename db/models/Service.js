@@ -10,7 +10,7 @@ const serviceSchema = new Schema(
     carId: { type: Schema.Types.ObjectId, ref: "Car" },
     odometerReading: { type: Number, required: true },
     serviceIncluded: {
-      engine: {
+      Motor: {
         Öl: { type: Boolean, required: true, default: false }, //oil
         Kühlmittel: { type: Boolean, required: true, default: false },//coolant
         Ölfilter: { type: Boolean, required: true, default: false },//oil Filter
@@ -19,14 +19,14 @@ const serviceSchema = new Schema(
         Keilriemen: { type: Boolean, required: true, default: false },//fan Belt
         Zahnriemen: { type: Boolean, required: true, default: false },//timing Belt
       },
-      electrics: {
+      Elektrik: {
         Zündkerzen: { type: Boolean, required: true, default: false },//spark Plugs
         Zündkerzenkabel: { type: Boolean, required: true, default: false },//spark Plug Cables
         Sicherungen: { type: Boolean, required: true, default: false },//fuses
         Lampen: { type: Boolean, required: true, default: false },//lamps
         Batterie: { type: Boolean, required: true, default: false },//battery
       },
-      mechanical: {
+      Mechanik: {
         Gaskabel: { type: Boolean, required: true, default: false },//gas Cable
         Bremskabel: { type: Boolean, required: true, default: false },//break Cable
         Bremsflüssigkeit: { type: Boolean, required: true, default: false },//brake Fluid

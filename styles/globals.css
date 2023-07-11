@@ -47,12 +47,18 @@
 :root {
   --background: #000;
   --background-highlight: #2b2b2b;
+  --background-highlight-gradient: radial-gradient(
+    ellipse,
+    rgba(43, 43, 43, 1) 5%,
+    rgba(46, 45, 44, 1) 60%,
+    rgba(118, 105, 72, 1) 70%,
+    rgba(200, 161, 62, 1) 80%
+  );
   --fontColor-onHighlight: #ffffff;
   --fontColor-body: #b4b4b4;
   --fontColor-body-disabled: #7c7c7c;
   --fontColor-highlight: #c8a13e;
   --fontColor-highlight-disabled: #ada07e;
-  --fontColor-highlight-asfa: #310ae0;
 }
 
 *,
@@ -101,10 +107,10 @@ h3 {
   font-size: 1.4em;
   margin: 30px 0 10px;
 }
-h5 {
+h4 {
   font-size: 1.15em;
   margin-bottom: 5px;
-  font-style: italic;
+  font-weight: bold;
 }
 h5 {
   font-size: 1.1em;
@@ -112,7 +118,14 @@ h5 {
   font-style: italic;
 }
 
-p{
+p {
   line-height: 2em;
   font-size: 1.1em;
+}
+
+::placeholder {
+  color: var(--background-highlight);
+  font-size: small;
+  font-style: italic;
+  vertical-align: center;
 }

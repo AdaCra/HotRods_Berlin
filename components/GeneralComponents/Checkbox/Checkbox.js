@@ -61,6 +61,7 @@ export default function Checkbox({ label, name, value, onChange, disabled }) {
       </Label>
       <div>
         <CheckboxStyle
+          key={name}
           type="checkbox"
           name={name}
           id={name}

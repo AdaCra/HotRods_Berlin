@@ -1,8 +1,9 @@
 import { useState } from "react";
 import TimeDifference from "../GeneralComponents/TimeDateValueCalculations/TimeDifference";
 import styled from "styled-components";
-import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH3/ExpandingH3WithOnClickToggle";
+import ExpandingH3WithOnClickToggle from "../GeneralComponents/ExpandingH/ExpandingH3WithOnClickToggle";
 import BenzineForm from "./BenzineForm";
+import SectionDivider from "../GeneralComponents/HorizontalRule/HrSectionSpacer";
 
 const CenterSection = styled.section`
   margin: 20px auto;
@@ -47,7 +48,7 @@ export default function BenzinePageContent({ latestEntry, handleSubmit }) {
         ) : (
           <h3 style={{ textAlign: "center" }}>DIE ZÄHLUNG IST AKTUEL</h3>
         )}
-        <hr style={{ margin: "30px 0 25px" }} />
+        <SectionDivider />
       </section>
       <CenterSection>
         <p>
@@ -69,7 +70,7 @@ export default function BenzinePageContent({ latestEntry, handleSubmit }) {
             am {formattedDate === "Invalid Date" ? "Unbekannt" : formattedDate}
           </em>
         </p>
-        <hr style={{ margin: "30px 0 25px" }} />
+        <SectionDivider />
       </CenterSection>
 
       {!lastIsRefill ? (
@@ -108,7 +109,7 @@ export default function BenzinePageContent({ latestEntry, handleSubmit }) {
           </b>
         </h4>
       )}
-      <hr style={{ margin: "30px 0 25px" }} />
+      <SectionDivider />
     </CenterSection>
   );
 }
