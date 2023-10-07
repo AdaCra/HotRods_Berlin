@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
-import "./DamageReport";
-import "./Car";
+import "./DamageReport"; // Import the DamageReport schema.
+
+import "./Car"; // Import the Car schema.
 
 const { Schema } = mongoose;
 
+// Define the contact schema separately for reusability
 const contactSchema = {
   name: { type: String },
   street: { type: String },
@@ -35,15 +37,30 @@ const accidentSchema = new Schema({
       Make: { type: String },
       Model: { type: String },
       color: { type: String },
-      outsiderCarDamageDescription: { type: String, min: 20, max: 1000 },
-      photos: { type: URL },
+      outsiderCarDamageDescription: {
+        type: String,
+        minlength: 20,
+        maxlength: 1000,
+      },
+      photos: { type: String },
     },
   },
-  eventDescription: { type: String, required: true, min: 20, max: 1000 },
+  eventDescription: {
+    type: String,
+    required: true,
+    minlength: 20,
+    maxlength: 1000,
+  },
   numberOfCarsInvolved: { type: Number },
   carsInvolved: [{ type: Schema.Types.ObjectId, ref: "Accident" }],
+  createdAt: { type: Date, default: Date.now }, // Add createdAt field
+  updatedAtAt: { type: Date, default: Date.now }, // Add updatedAt field
 });
 
-const Accident = mongoose.models.Accident || mongoose.model("Accident", accidentSchema);
+accidentSchema.index({ createdAt: 1 }, { expireAfterSeconds: 1800 });
+
+// Define the Accident model if it doesn't already exist
+const Accident =
+  mongoose.models.Accident || mongoose.model("Accident", accidentSchema);
 
 export default Accident;

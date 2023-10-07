@@ -3,7 +3,7 @@ export default function Home() {
     <main>
       <form>
         <legend>
-          <h2>Login</h2>
+          <h2>All new Database entries will be deleted after 30 minutes</h2>
         </legend>
       </form>
     </main>

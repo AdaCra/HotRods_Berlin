@@ -13,7 +13,7 @@ const partsSchema = new Schema({
   alertQuantity: {
     type: Number,
     required: true,
-    minimum: 0,
+    min: 0,
     required: true,
     validate: {
       validator: Number.isInteger,
@@ -35,7 +35,7 @@ const partsSchema = new Schema({
     type: String,
     enum: {
       values: {
-        Fahrwerkskomponenten: [ "Karosserie", "Rahmen", "Verschieden"],
+        Fahrwerkskomponenten: ["Karosserie", "Rahmen", "Verschieden"],
         Antriebsstrang: ["Motor", "Kraftstoffsystem", "Getriebe", "Kühlung"],
         Radmontage: ["Bremssystem", "Radnabeneinheit", "Reifen", "Lenkung"],
         Elektrobauteile: [
@@ -58,7 +58,7 @@ const partsSchema = new Schema({
   currentQuantity: {
     type: Number,
     required: true,
-    minimum: 0,
+    min: 0,
     validate: {
       validator: Number.isInteger,
       message: "Die Anzahl muss eine ganze Zahl sein.",
@@ -77,11 +77,11 @@ const partsSchema = new Schema({
   ],
   purchaseHistory: [
     {
-      recieptNumber: { type: String },
+      receiptNumber: { type: String },
       receiptQty: {
         type: Number,
         required: true,
-        minimum: 1,
+        min: 1,
         validate: {
           validator: Number.isInteger,
           message: "Die Anzahl muss eine ganze Zahl sein.",
@@ -89,7 +89,11 @@ const partsSchema = new Schema({
       },
     },
   ],
+
+  createdAt: { type: Date, default: Date.now }, // Add createdAt field
 });
+
+partsSchema.index({ createdAt: 1 }, { expireAfterSeconds: 1800 });
 
 const Parts = mongoose.models.Parts || mongoose.model("Parts", partsSchema);
 

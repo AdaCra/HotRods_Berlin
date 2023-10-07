@@ -61,13 +61,17 @@ export default function BenzinePageContent({ latestEntry, handleSubmit }) {
         </p>
         <p>
           <em>
-            Vor: <b> {Math.floor(hoursSinceLastUpdate)} stunden </b>
+            Vor:{" "}
+            <b>
+              {(createAtTimestamp) == "Invalid Date"
+                ? "Niemals"
+                : `${Math.floor(hoursSinceLastUpdate)} stunden`}{" "}
+            </b>
           </em>
         </p>
         <p style={{ lineHeight: 0.1 }}>
           <em style={{ marginTop: 0, fontSize: "x-small" }}>
-            {formattedTime === "Invalid Date" ? "Unbekannt" : formattedTime} Uhr
-            am {formattedDate === "Invalid Date" ? "Unbekannt" : formattedDate}
+            {formattedTime === "Invalid Date" ? "" : `${formattedTime}Uhr am ${formattedDate}`} 
           </em>
         </p>
         <SectionDivider />

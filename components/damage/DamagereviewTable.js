@@ -66,7 +66,7 @@ export default function CarDamageReview({ damage }) {
 
   function handlePhotoReveal() {
     setShowPhotos(!showPhotos);
-    console.log(showPhotos);
+    // console.log(showPhotos);
   }
   return (
     <>
@@ -79,7 +79,7 @@ export default function CarDamageReview({ damage }) {
                   <FormButton onClick={handlePhotoReveal}>✕</FormButton>
                   <PhotoBox>
                     {damage.photos.map((photo, index) => {
-                      console.log(index + 1 + ": " + photo);
+                      // console.log(index + 1 + ": " + photo);
                       return (
                         <DamageImage
                           key={index}
@@ -131,7 +131,7 @@ export default function CarDamageReview({ damage }) {
         </tbody>
       </TableStyle>
       <SectionDivider />
-      {console.log(showPhotos)}
+      {/* {console.log(showPhotos)} */}
     </>
   );
 }

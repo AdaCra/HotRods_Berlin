@@ -128,7 +128,9 @@ export default function DetailsPage() {
         </TableStyle>
 
         <SectionDivider />
+          <h3>AKTUALISIEREN</h3>
         <ButtonSection>
+          
           <FormButton
             onClick={() => {
               router.push(`/damageReport`);

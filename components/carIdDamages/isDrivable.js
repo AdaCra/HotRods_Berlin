@@ -7,7 +7,7 @@ export function isDrivable(car) {
     (report) =>
       !report.isResolved && report.isDrivable && report.isAffectsDriving
   );
-  console.table(drivingAffected);
+  // console.table(drivingAffected);
   if (drivingAffected.length > 0) return false;
   else if (undrivable.length > 0) return null;
   else return true;

@@ -26,7 +26,7 @@ export default function DamageImageUpload({ ImageArray }) {
       return (ImageArray = files);
     } 
 
-  console.log(files)
+  // console.log(files)
 
     const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
 
